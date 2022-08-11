@@ -1,11 +1,8 @@
 package model
 
 import (
-	"log"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/joho/godotenv"
 )
 
 type User struct {
@@ -15,10 +12,6 @@ type User struct {
 	Password string `gorm:"not null"`
 }
 
-func init() {
-	// 環境変数の読み込み
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Enable load env file: %v", err)
-	}
+func SettingDB() {
+	var user User
 }

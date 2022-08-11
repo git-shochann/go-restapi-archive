@@ -35,7 +35,8 @@ RestAPI を Go で試してみる
 2, ローカルで MySQL のコンテナを作成後、Docker の network を通して、MySQL を操作する
 
 ```shell
-    docker-compose build
+    docker-compose up -d # コンテナの作成
+
 ```
 
 ## 使用パッケージなど
