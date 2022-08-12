@@ -1,6 +1,6 @@
 # Habit Management
 
-RestAPI を Go で試してみる
+RestAPI を Go で試してみる DB は Docker にて作成
 
 ## API 一覧
 
@@ -36,13 +36,16 @@ RestAPI を Go で試してみる
 
 ```shell
     docker-compose up -d # コンテナの作成
-    docker-compose exec mysql_db bash # コンテナに入る
-    mysql -u root -p # dbに接続
+    docker exec -it mysql_db bash # コンテナに入る
+    mysql -u root -p # DBに接続
+    show databases; # DBを表示
+    use test; # 使用するDBを選択
+    show columns from [テーブル名]; # 使用するテーブル名を表示
 ```
 
 ## 使用パッケージなど
 
----
+## docker exec -it [コンテナ ID]
 
 環境変数の管理
 
@@ -55,3 +58,7 @@ ORM
 MySQL
 
 - `https://github.com/go-sql-driver/mysql`
+
+Varidation
+
+- `https://github.com/go-playground/validator`

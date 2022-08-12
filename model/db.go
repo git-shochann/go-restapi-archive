@@ -19,14 +19,14 @@ type User struct {
 	Password string `gorm:"not null"`
 }
 
-func ConnectDB() {
+func ConnectDB() *gorm.DB {
 
 	user := os.Getenv("DB_USER")
 	pass := os.Getenv("DB_PASS")
 	dbName := os.Getenv("DB_NAME")
 
 	// test:test@tcp(mysql_db:3306)/test?charset=utf8mb4&parseTime=true
-	dsn := fmt.Sprintf("%s:%s@tcp(mysql_db:3306)/%s?charset=utf8mb4&parseTime=true", user, pass, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s?charset=utf8mb4&parseTime=true", user, pass, dbName)
 
 	// コネクションプールの生成
 	DB, err := gorm.Open("mysql", dsn)
@@ -37,6 +37,6 @@ func ConnectDB() {
 	}
 
 	// テーブルの作成
-	DB.AutoMigrate(&User{})
+	return DB.AutoMigrate(&User{})
 
 }
