@@ -32,11 +32,12 @@ RestAPI を Go で試してみる
     touch .env
 ```
 
-2, ローカルで MySQL のコンテナを作成後、Docker の network を通して、MySQL を操作する
+2, ローカルから MySQL のコンテナを作成後、コンテナの MySQL を操作する
 
 ```shell
     docker-compose up -d # コンテナの作成
-
+    docker-compose exec mysql_db bash # コンテナに入る
+    mysql -u root -p # dbに接続
 ```
 
 ## 使用パッケージなど
