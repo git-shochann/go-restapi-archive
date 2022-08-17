@@ -25,7 +25,7 @@ func main() {
 	loadENV()
 
 	// DBに接続してテーブルを作成する
-	model.ConnectDB()
+	db := model.ConnectDB()
 
 	// サーバーのスタート
 	controllers.StartServer()
