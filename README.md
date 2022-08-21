@@ -45,8 +45,6 @@ RestAPI を Go で試してみる DB は Docker にて作成
 
 ## 使用パッケージなど
 
-## docker exec -it [コンテナ ID]
-
 環境変数の管理
 
 - `https://github.com/joho/godotenv`

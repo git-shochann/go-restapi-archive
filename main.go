@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"go-rest-api/controllers"
-	"go-rest-api/model"
+	"go-rest-api/models"
 	"log"
 	"os"
 
@@ -25,8 +25,8 @@ func main() {
 	loadENV()
 
 	// DBに接続してテーブルを作成する
-	db := model.ConnectDB()
+	models.ConnectDB()
 
-	// サーバーのスタート
+	// APIサーバーのスタート
 	controllers.StartServer()
 }
