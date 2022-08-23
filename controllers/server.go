@@ -36,7 +36,9 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	var user models.UserSignupVaridation
 	err = json.Unmarshal(reqBody, &user)
 	if err != nil {
-		return // TODO: ここらへんのレスポンスを決定する
+		models.SendResponse(w, "Unable to unmarshal json", http.StatusBadRequest)
+		log.Println(err)
+		return
 	}
 
 	ok, result := user.SignupVaridator()
@@ -45,6 +47,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// false時の処理
 	if !ok {
+		models.SendResponse(w, result, http.StatusBadRequest)
+		log.Println(result)
 		return
 	}
 
@@ -58,7 +62,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	// 実際にDBに登録する
 	if err := createUser.CreateUser(); err != nil {
 		models.SendResponse(w, "Unable to register user", http.StatusInternalServerError)
-		// log.Fatalln() or return err
+		log.Println(err)
+		return
 	}
 
 }
