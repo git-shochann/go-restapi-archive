@@ -1,0 +1,286 @@
+2022/08/24 08:52:03 server.go:3159: http: panic serving 127.0.0.1:53554: Undefined validation function 'lowercase' on field 'Password'
+goroutine 35 [running]:
+net/http.(*conn).serve.func1(0x1400031e640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x104d5baa0, 0x140003765b0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive(0x14000303320, {0x104d66c62, 0x27}, {0x104d66c3f, 0x8}, {0x0, 0x0}, 0x0)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/cache.go:289 +0xadc
+github.com/go-playground/validator.(*Validate).extractStructCache(0x14000303320, {0x104da2060, 0x1400032a880, 0x99}, {0x104d48440, 0x14})
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/cache.go:150 +0x448
+github.com/go-playground/validator.(*validate).validateStruct(0x1400035e6c0, {0x104dcff30, 0x140000ba008}, {0x104da2060, 0x1400032a880, 0x99}, {0x104da2060, 0x1400032a880, 0x99}, {0x104dd7b10, ...}, ...)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator.go:37 +0x100
+github.com/go-playground/validator.(*Validate).StructCtx(0x14000303320, {0x104dcff30, 0x140000ba008}, {0x104da2060, 0x1400032a880})
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator_instance.go:304 +0x3c8
+github.com/go-playground/validator.(*Validate).Struct(...)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator_instance.go:277
+go-rest-api/models.UserSignupVaridation.SignupVaridator({{0x14000326c98, 0x4}, {0x14000326c9c, 0x4}, {0x14000326ca0, 0xe}, {0x14000326cb0, 0xb}})
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:21 +0x94
+go-rest-api/controllers.signupFunc({0x104dcde38, 0x140003580e0}, 0x14000366200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:46 +0x200
+net/http.HandlerFunc.ServeHTTP(0x104dc3800, {0x104dcde38, 0x140003580e0}, 0x14000366200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400034a000, {0x104dcde38, 0x140003580e0}, 0x14000366000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000358000}, {0x104dcde38, 0x140003580e0}, 0x14000366000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400031e640, {0x104dcffa0, 0x14000305380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:30:25 server.go:3159: http: panic serving 127.0.0.1:53959: Undefined validation function 'lowercase' on field 'Password'
+goroutine 35 [running]:
+net/http.(*conn).serve.func1(0x14000396640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1031f3aa0, 0x140003ee5b0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive(0x14000383320, {0x1031fec62, 0x27}, {0x1031fec3f, 0x8}, {0x0, 0x0}, 0x0)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/cache.go:289 +0xadc
+github.com/go-playground/validator.(*Validate).extractStructCache(0x14000383320, {0x1032370e0, 0x140003a2800, 0x199}, {0x1031e0440, 0x14})
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/cache.go:150 +0x448
+github.com/go-playground/validator.(*validate).validateStruct(0x140003d86c0, {0x103267ef0, 0x14000016110}, {0x103204de0, 0x140003a2800, 0x16}, {0x1032370e0, 0x140003a2800, 0x199}, {0x10326fad0, ...}, ...)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator.go:37 +0x100
+github.com/go-playground/validator.(*Validate).StructCtx(0x14000383320, {0x103267ef0, 0x14000016110}, {0x103204de0, 0x140003a2800})
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator_instance.go:304 +0x3c8
+github.com/go-playground/validator.(*Validate).Struct(...)
+	/Users/sho/go/pkg/mod/github.com/go-playground/validator@v9.31.0+incompatible/validator_instance.go:277
+go-rest-api/models.(*UserSignupVaridation).SignupVaridator(0x140003a2800)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:21 +0x58
+go-rest-api/controllers.signupFunc({0x103265e38, 0x140003d00e0}, 0x140003de200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:46 +0x1e8
+net/http.HandlerFunc.ServeHTTP(0x10325b7e0, {0x103265e38, 0x140003d00e0}, 0x140003de200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003c2000, {0x103265e38, 0x140003d00e0}, 0x140003de000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d0000}, {0x103265e38, 0x140003d00e0}, 0x140003de000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000396640, {0x103267f60, 0x14000385380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:33:41 server.go:3159: http: panic serving 127.0.0.1:53993: runtime error: invalid memory address or nil pointer dereference
+goroutine 51 [running]:
+net/http.(*conn).serve.func1(0x1400039e640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x104db5a20, 0x10503a6f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x104dacd80, 0x140003a1700})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x104dacd80, 0x140003a1700})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.User.CreateUser({{0x0, {0x0, 0x0, 0x0}, {0x0, 0x0, 0x0}, 0x0}, {0x140003a6c98, 0x4}, ...})
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:7 +0xa4
+go-rest-api/controllers.signupFunc({0x104e0de38, 0x140003d80e0}, 0x140003e6200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:65 +0x3b8
+net/http.HandlerFunc.ServeHTTP(0x104e037e0, {0x104e0de38, 0x140003d80e0}, 0x140003e6200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003ca000, {0x104e0de38, 0x140003d80e0}, 0x140003e6000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d8000}, {0x104e0de38, 0x140003d80e0}, 0x140003e6000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400039e640, {0x104e0ff60, 0x14000385380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:37:58 server.go:3159: http: panic serving 127.0.0.1:54017: runtime error: invalid memory address or nil pointer dereference
+goroutine 23 [running]:
+net/http.(*conn).serve.func1(0x1400035cf00)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x102a39a20, 0x102cbe6f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x102a30d80, 0x14000373480})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x102a30d80, 0x14000373480})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.User.CreateUser({{0x0, {0x0, 0x0, 0x0}, {0x0, 0x0, 0x0}, 0x0}, {0x14000317b48, 0x4}, ...})
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:11 +0xf4
+go-rest-api/controllers.signupFunc({0x102a91e18, 0x140003840e0}, 0x14000339700)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:65 +0x358
+net/http.HandlerFunc.ServeHTTP(0x102a877e0, {0x102a91e18, 0x140003840e0}, 0x14000339700)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400022c540, {0x102a91e18, 0x140003840e0}, 0x14000339500)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000384000}, {0x102a91e18, 0x140003840e0}, 0x14000339500)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400035cf00, {0x102a93f80, 0x14000363650})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:40:29 server.go:3159: http: panic serving 127.0.0.1:54033: runtime error: invalid memory address or nil pointer dereference
+goroutine 35 [running]:
+net/http.(*conn).serve.func1(0x140000a4640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x100a55a20, 0x100cda6f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x100a86220, 0x140000a7700})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x100a86220, 0x140000a7700})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.User.CreateUser({{0x0, {0x0, 0x0, 0x0}, {0x0, 0x0, 0x0}, 0x0}, {0x140000acc98, 0x4}, ...})
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:14 +0xc4
+go-rest-api/controllers.signupFunc({0x100aade18, 0x140000de0e0}, 0x140000ea200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x2c8
+net/http.HandlerFunc.ServeHTTP(0x100aa37e0, {0x100aade18, 0x140000de0e0}, 0x140000ea200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140000d0000, {0x100aade18, 0x140000de0e0}, 0x140000ea000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140000de000}, {0x100aade18, 0x140000de0e0}, 0x140000ea000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140000a4640, {0x100aaff40, 0x14000095380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:41:40 server.go:3159: http: panic serving 127.0.0.1:54068: runtime error: invalid memory address or nil pointer dereference
+goroutine 51 [running]:
+net/http.(*conn).serve.func1(0x1400039e640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x102eeda80, 0x1031726f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x102ec5600, 0x140003861e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x102ec5600, 0x140003861e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.(*User).CreateUser(0x140003a1700)
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:13 +0xe4
+go-rest-api/controllers.signupFunc({0x102f45e58, 0x140003d80e0}, 0x140003e6200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x334
+net/http.HandlerFunc.ServeHTTP(0x102f3b820, {0x102f45e58, 0x140003d80e0}, 0x140003e6200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003ca000, {0x102f45e58, 0x140003d80e0}, 0x140003e6000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d8000}, {0x102f45e58, 0x140003d80e0}, 0x140003e6000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400039e640, {0x102f47fc0, 0x14000385380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 10:42:49 server.go:3159: http: panic serving 127.0.0.1:54081: runtime error: invalid memory address or nil pointer dereference
+goroutine 35 [running]:
+net/http.(*conn).serve.func1(0x140003a0640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1030a5a80, 0x10332a6f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x10307d600, 0x140003a21e0})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x10307d600, 0x140003a21e0})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.(*User).CreateUser(0x14000391780)
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:15 +0x1a8
+go-rest-api/controllers.signupFunc({0x1030fde58, 0x140003d80e0}, 0x140003e6200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x334
+net/http.HandlerFunc.ServeHTTP(0x1030f3820, {0x1030fde58, 0x140003d80e0}, 0x140003e6200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003ca000, {0x1030fde58, 0x140003d80e0}, 0x140003e6000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d8000}, {0x1030fde58, 0x140003d80e0}, 0x140003e6000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140003a0640, {0x1030fff80, 0x1400039d320})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 11:35:11 server.go:3159: http: panic serving 127.0.0.1:54703: runtime error: invalid memory address or nil pointer dereference
+goroutine 20 [running]:
+net/http.(*conn).serve.func1(0x140003aa640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x104a81a80, 0x104d066f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x104a59600, 0x1400039c1e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x104a59600, 0x1400039c1e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.(*User).CreateUser(0x14000395780)
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:16 +0x224
+go-rest-api/controllers.signupFunc({0x104ad9e58, 0x140003d80e0}, 0x140003e6200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x334
+net/http.HandlerFunc.ServeHTTP(0x104acf820, {0x104ad9e58, 0x140003d80e0}, 0x140003e6200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003ca000, {0x104ad9e58, 0x140003d80e0}, 0x140003e6000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d8000}, {0x104ad9e58, 0x140003d80e0}, 0x140003e6000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140003aa640, {0x104adbf80, 0x1400038d410})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 11:35:44 server.go:3159: http: panic serving 127.0.0.1:54712: runtime error: invalid memory address or nil pointer dereference
+goroutine 51 [running]:
+net/http.(*conn).serve.func1(0x1400039e640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x100ec9a80, 0x10114e6f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x100ea1600, 0x140003861e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x100ea1600, 0x140003861e8})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.(*User).CreateUser(0x140003a1700)
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:16 +0x224
+go-rest-api/controllers.signupFunc({0x100f21e58, 0x140003d80e0}, 0x140003e6200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x334
+net/http.HandlerFunc.ServeHTTP(0x100f17820, {0x100f21e58, 0x140003d80e0}, 0x140003e6200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003ca000, {0x100f21e58, 0x140003d80e0}, 0x140003e6000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003d8000}, {0x100f21e58, 0x140003d80e0}, 0x140003e6000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400039e640, {0x100f23f80, 0x14000385380})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 11:36:57 server.go:3159: http: panic serving 127.0.0.1:54720: runtime error: invalid memory address or nil pointer dereference
+goroutine 6 [running]:
+net/http.(*conn).serve.func1(0x14000386640)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x100a4da20, 0x100cd26f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*DB).clone(0x0)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:853 +0x20
+github.com/jinzhu/gorm.(*DB).NewScope(0x0, {0x100a44d80, 0x1400007f780})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:204 +0x28
+github.com/jinzhu/gorm.(*DB).Create(0x0, {0x100a44d80, 0x1400007f780})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:482 +0x38
+go-rest-api/models.(*User).CreateUser(0x1400007f780)
+	/Users/sho/Coding/go/src/go-rest-api/models/users.go:16 +0x94
+go-rest-api/controllers.signupFunc({0x100aa5df8, 0x140003ac0e0}, 0x140003b8200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:63 +0x334
+net/http.HandlerFunc.ServeHTTP(0x100a9b7c0, {0x100aa5df8, 0x140003ac0e0}, 0x140003b8200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140003a0000, {0x100aa5df8, 0x140003ac0e0}, 0x140003b8000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140003ac000}, {0x100aa5df8, 0x140003ac0e0}, 0x140003b8000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000386640, {0x100aa7f60, 0x14000383320})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/08/24 11:44:49 server.go:3159: http: panic serving 127.0.0.1:55004: runtime error: invalid memory address or nil pointer dereference
+goroutine 23 [running]:
+net/http.(*conn).serve.func1(0x140002dd040)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1006ada80, 0x1009326f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/controllers.signupFunc({0x100705e58, 0x140003860e0}, 0x140002b9700)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/server.go:57 +0x1fc
+net/http.HandlerFunc.ServeHTTP(0x1006fb820, {0x100705e58, 0x140003860e0}, 0x140002b9700)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140001ac540, {0x100705e58, 0x140003860e0}, 0x140002b9500)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000386000}, {0x100705e58, 0x140003860e0}, 0x140002b9500)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140002dd040, {0x100707fc0, 0x140002e3650})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8

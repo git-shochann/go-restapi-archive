@@ -10,20 +10,20 @@ type UserSignupVaridation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,lowercase,numeric,min=8,max=15"`
+	Password  string `json:"password" validate:"required,min=8,max=15"` // ,lowercase,numeric でエラー？
 }
 
 // こういうところはポインタレシーバーにするべきか？ -> uを参照して変更しないので値レシーバーでOK
 // https://qiita.com/Yuuki557/items/e9f5bdfbbfe92973a05e
-func (u UserSignupVaridation) SignupVaridator() (ok bool, result string) {
+func (u *UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
 
 	validate := validator.New()
-	err := validate.Struct(u)
+	err := validate.Struct(u) // ここでエラー => panicになってる
 
 	var errorMessage string // nilで埋められる
 
 	if err != nil {
-		fmt.Println(err.(validator.ValidationErrors))
+		fmt.Printf("err.(validator.ValidationErrors): %v\n", err.(validator.ValidationErrors)) // 辿り着いてない
 		for _, fieldErr := range err.(validator.ValidationErrors) {
 
 			fieldName := fieldErr.Field()

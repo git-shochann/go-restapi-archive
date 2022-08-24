@@ -41,9 +41,9 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Printf("user: %v\n", user)
+
 	ok, result := user.SignupVaridator()
-	fmt.Printf("ok: %v\n", ok)
-	fmt.Printf("result: %v\n", result)
 
 	// false時の処理
 	if !ok {
