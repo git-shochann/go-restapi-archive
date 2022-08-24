@@ -3,27 +3,27 @@ package models
 import (
 	"fmt"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 type UserSignupVaridation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=8,max=15"` // ,lowercase,numeric でエラー？
+	Password  string `json:"password" validate:"required,min=8,max=15"` // 8-15文字, 小文字, 数値 // test000test ??
 }
 
-// こういうところはポインタレシーバーにするべきか？ -> uを参照して変更しないので値レシーバーでOK
-// https://qiita.com/Yuuki557/items/e9f5bdfbbfe92973a05e
 func (u *UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
 
 	validate := validator.New()
-	err := validate.Struct(u) // ここでエラー => panicになってる
+	err := validate.Struct(&u)
 
-	var errorMessage string // nilで埋められる
+	fmt.Printf("err.(validator.ValidationErrors): %v\n", err.(validator.ValidationErrors))
+
+	var errorMessage string
 
 	if err != nil {
-		fmt.Printf("err.(validator.ValidationErrors): %v\n", err.(validator.ValidationErrors)) // 辿り着いてない
+
 		for _, fieldErr := range err.(validator.ValidationErrors) {
 
 			fieldName := fieldErr.Field()
