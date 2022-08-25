@@ -5,13 +5,11 @@ import (
 	"log"
 )
 
-func (u *User) CreateUser() error {
+// 値渡し
+func (u User) CreateUser() error {
 
 	fmt.Println("CreateUser!")
-	// 戻り値のErrorフィールドを参照
-	// invalid memory address or nil pointer dereference
-	// fmt.Printf("u: %+v\n", u)
-	// fmt.Printf("*u: %+v\n", *u) // アドレスの値を参照する -> デリファレンス
+	// uのポインタ(アドレス)を渡す
 	if err := DB.Create(&u).Error; err != nil {
 		log.Fatalln(err)
 	}

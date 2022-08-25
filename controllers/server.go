@@ -16,6 +16,7 @@ func StartServer() {
 	router.HandleFunc("/", indexFunc)
 	router.HandleFunc("/api/v1/signup", signupFunc).Methods("POST")
 	router.HandleFunc("/api/v1/signin", signinFunc).Methods("POST")
+	router.HandleFunc("api/v1/create", createHabitFunc).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
@@ -48,7 +49,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	// false時の処理
 	if !ok {
 		models.SendResponse(w, result, http.StatusBadRequest)
-		log.Println(result)
+		log.Printf("result: %v\n", result)
 		return
 	}
 
@@ -69,4 +70,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 }
 func signinFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("OK")
+}
+
+func createHabitFunc(w http.ResponseWriter, r *http.Request) {
+
 }
