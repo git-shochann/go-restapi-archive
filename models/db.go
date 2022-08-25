@@ -11,6 +11,7 @@ import (
 
 // グローバルに宣言
 var DB *gorm.DB
+var err error
 
 type User struct {
 	gorm.Model        // ID, CreatedAt, UpdatedAt, DeletedAt を作成
@@ -22,8 +23,9 @@ type User struct {
 
 type Habit struct {
 	gorm.Model
-	Content string `gorm:"not null"`
-	UserID  string `gorm:"not null"`
+	Content  string `gorm:"not null"`
+	Finished bool   `gorm:"not null"`
+	UserID   string `gorm:"not null"`
 }
 
 func ConnectDB() *gorm.DB {
@@ -36,7 +38,7 @@ func ConnectDB() *gorm.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s?charset=utf8mb4&parseTime=true", user, pass, dbName)
 
 	// コネクションプールの生成
-	DB, err := gorm.Open("mysql", dsn)
+	DB, err = gorm.Open("mysql", dsn)
 	if err != nil {
 		log.Fatalf("Enable Connect to DB: %v", err)
 	} else {
