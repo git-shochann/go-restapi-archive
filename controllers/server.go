@@ -60,11 +60,11 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	createUser.Email = user.Email
 	createUser.Password = models.EncryptPassword(user.Password)
 
-	fmt.Printf("createUser: %+v\n", createUser)
-	fmt.Printf("&createUser: %+v\n", &createUser)
+	fmt.Printf("createUser: %v\n", createUser)
+	fmt.Printf("&createUser: %v\n", &createUser)
 
 	// 実際にDBに登録する
-	if err := createUser.CreateUser(w http.ResponseWriter); err != nil {
+	if err := createUser.CreateUser(); err != nil {
 		models.SendResponse(w, "Unable to register user", http.StatusInternalServerError)
 		log.Println(err)
 		return

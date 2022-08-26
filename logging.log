@@ -304,3 +304,9 @@ net/http.(*conn).serve(0x140000c1180, {0x10481ef00, 0x1400007f380})
 created by net/http.(*Server).Serve
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
 2022/08/25 22:15:05 users.go:17: Error 1364: Field 'name' doesn't have a default value
+2022/08/26 16:26:00 users.go:19: Error 1364: Field 'name' doesn't have a default value
+2022/08/26 16:26:00 server.go:3159: http: superfluous response.WriteHeader call from go-rest-api/models.SendResponse (logic.go:31)
+2022/08/26 16:26:00 server.go:69: Error 1364: Field 'name' doesn't have a default value
+2022/08/26 16:26:56 users.go:19: Error 1364: Field 'name' doesn't have a default value
+2022/08/26 16:26:56 server.go:3159: http: superfluous response.WriteHeader call from go-rest-api/models.SendResponse (logic.go:31)
+2022/08/26 16:26:56 server.go:69: Error 1364: Field 'name' doesn't have a default value
