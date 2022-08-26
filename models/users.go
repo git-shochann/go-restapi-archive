@@ -18,4 +18,5 @@ func (u User) CreateUser() error {
 		return err
 	}
 	return nil
+
 }

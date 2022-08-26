@@ -53,6 +53,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// 既存ユーザーがEmailを使用していないかチェック
+
 	// ユーザーを登録する準備
 	var createUser models.User
 	createUser.FirstName = user.FirstName
@@ -70,6 +72,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	models.SendResponse(w, "Successfully Signup", http.StatusOK)
+
 }
 func signinFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("OK")
@@ -77,6 +81,6 @@ func signinFunc(w http.ResponseWriter, r *http.Request) {
 
 func createHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// ユーザーを取得する
-
+	DB.Where()
 	// 登録する
 }
