@@ -1,41 +1,22 @@
 package models
 
 import (
-	"github.com/go-playground/validator/v10"
+	"fmt"
+
+	"github.com/golang-jwt/jwt/v4"
 )
 
-type UserSignupVaridation struct {
-	FirstName string `json:"firstname" validate:"required"`
-	LastName  string `json:"lastname" validate:"required"`
-	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=8,max=15,lowercase"` // Error:Field validation for 'Password' failed on the 'numeric' tag
-}
+// 新規登録が成功したらトークンを発行してレスポンスに含める。
 
-func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
+func CreateJWTToken() {
+	// ヘッダー部分の作成
+	token := jwt.New(jwt.SigningMethodES256)
+	fmt.Printf("token: %v\n", token)
 
-	validate := validator.New()
-	err := validate.Struct(&u)
-
-	var errorMessage string
-
-	if err != nil {
-
-		for _, fieldErr := range err.(validator.ValidationErrors) {
-
-			fieldName := fieldErr.Field()
-
-			switch fieldName {
-			case "FirstName":
-				errorMessage = "Invalid First Name"
-			case "LastName":
-				errorMessage = "Invalid Last Name"
-			case "Email":
-				errorMessage = "Invalid Email"
-			case "Password":
-				errorMessage = "Invalid Password"
-			}
-		}
-		return false, errorMessage
+	// ペイロードの作成
+	token.Claims := jwt.MapClaims{
 	}
-	return true, errorMessage
+
+	// 署名を行う
+
 }

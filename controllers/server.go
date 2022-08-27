@@ -80,7 +80,7 @@ func signinFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 func createHabitFunc(w http.ResponseWriter, r *http.Request) {
-	// ユーザーを取得する
-	DB.Where()
+	// まずHabitの構造体を初期化する
+
 	// 登録する
 }
