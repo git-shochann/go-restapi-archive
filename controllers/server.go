@@ -72,10 +72,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("Start!")
-	// TODO: ここでエラーが起きてしまったらDBに登録されてしまうけどレスポンスは正常に返せない。そんなときは？
-
-	// 成功時
+	// 成功！
 	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
 		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 		log.Println(err)
