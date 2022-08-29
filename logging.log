@@ -1,2 +1,6 @@
 2022/08/26 16:49:15 server.go:69: Error 1364: Field 'name' doesn't have a default value
 2022/08/26 16:50:37 server.go:69: Error 1364: Field 'name' doesn't have a default value
+2022/08/29 19:51:19 server.go:80: key is of invalid type
+2022/08/29 19:56:56 server.go:81: key is of invalid type
+2022/08/29 20:19:28 server.go:81: key is of invalid type
+2022/08/29 20:24:55 server.go:81: key is of invalid type

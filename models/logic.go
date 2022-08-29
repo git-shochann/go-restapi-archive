@@ -1,6 +1,8 @@
 package models
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -25,9 +27,54 @@ func EncryptPassword(password string) string {
 	return string(hashed)
 }
 
-// jsonメッセージとステータスコードを返却する
-func SendResponse(w http.ResponseWriter, message string, code int) {
+// ステータスコード200の場合のレスポンス
+func SendResponse(w http.ResponseWriter, response []byte, code int) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	w.Write([]byte(message))
+	_, err := w.Write(response)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// ステータスコード200以外のレスポンスで使用
+func SendErrorResponse(w http.ResponseWriter, errorMessage string, code int) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+	_, err := w.Write([]byte(errorMessage))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// 新規登録とログイン時のレスポンスとしてJWTトークンとUser構造体を返却する
+func SendAuthResponse(w http.ResponseWriter, user *User, code int) error {
+	fmt.Println("SendAuthResponse!")
+
+	jwtToken, err := user.CreateJWTToken()
+	if err != nil {
+		return err
+	}
+
+	// レスポンス
+	response := AuthResponse{
+		User:     *user,
+		JwtToken: jwtToken,
+	}
+
+	// 構造体をjsonに変換
+	jsonResponse, err := json.Marshal(response)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("jsonResponse: %v\n", string(jsonResponse))
+
+	if err := SendResponse(w, jsonResponse, code); err != nil {
+		return err
+	}
+
+	return nil
+
 }

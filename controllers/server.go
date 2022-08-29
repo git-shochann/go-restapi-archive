@@ -16,7 +16,7 @@ func StartServer() {
 	router.HandleFunc("/", indexFunc)
 	router.HandleFunc("/api/v1/signup", signupFunc).Methods("POST")
 	router.HandleFunc("/api/v1/signin", signinFunc).Methods("POST")
-	router.HandleFunc("api/v1/create", createHabitFunc).Methods("POST")
+	// router.HandleFunc("api/v1/create", createHabitFunc).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
@@ -37,7 +37,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	var user models.UserSignupVaridation
 	err = json.Unmarshal(reqBody, &user)
 	if err != nil {
-		models.SendResponse(w, "Unable to unmarshal json", http.StatusBadRequest)
+		models.SendErrorResponse(w, "Unable to unmarshal json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -48,7 +48,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// false時の処理
 	if !ok {
-		models.SendResponse(w, result, http.StatusBadRequest)
+		models.SendErrorResponse(w, result, http.StatusBadRequest)
 		log.Printf("result: %v\n", result)
 		return
 	}
@@ -67,20 +67,24 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// 実際にDBに登録する
 	if err := createUser.CreateUser(); err != nil {
-		models.SendResponse(w, "Unable to register user", http.StatusInternalServerError)
+		models.SendErrorResponse(w, "Unable to register user", http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
 
-	models.SendResponse(w, "Successfully Signup", http.StatusOK)
+	fmt.Println("Start!")
+	// TODO: ここでエラーが起きてしまったらDBに登録されてしまうけどレスポンスは正常に返せない。そんなときは？
+
+	// 成功時
+	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
+		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
 
 }
+
+// サインイン(ログイン)
 func signinFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("OK")
-}
-
-func createHabitFunc(w http.ResponseWriter, r *http.Request) {
-	// まずHabitの構造体を初期化する
-
-	// 登録する
 }
