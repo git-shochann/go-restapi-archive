@@ -58,7 +58,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// メールアドレスがある -> 登録NG / メールアドレスがない -> 登録OK
 	err = models.GetUserByEmail(user, signupUser.Email)
-	// errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
+	// BUG: errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
 	if err != nil {
 		models.SendErrorResponse(w, "Something wrong", http.StatusInternalServerError)
 		log.Println(err)
