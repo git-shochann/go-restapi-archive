@@ -34,17 +34,17 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	var user models.UserSignupVaridation
-	err = json.Unmarshal(reqBody, &user)
+	var signupUser models.UserSignupVaridation
+	err = json.Unmarshal(reqBody, &signupUser)
 	if err != nil {
 		models.SendErrorResponse(w, "Unable to unmarshal json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
 
-	fmt.Printf("user: %v\n", user)
+	// fmt.Printf("signupUser: %v\n", signupUser)
 
-	ok, result := user.SignupVaridator()
+	ok, result := signupUser.SignupVaridator()
 
 	// false時の処理
 	if !ok {
@@ -54,6 +54,26 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 既存ユーザーがEmailを使用していないかチェック
+	var user models.User
+
+	// メールアドレスがある -> 登録NG / メールアドレスがない -> 登録OK
+	err = models.GetUserByEmail(user, signupUser.Email)
+	// errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
+	if err != nil {
+		models.SendErrorResponse(w, "Something wrong", http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	// userの値があるかどうかでチェックする
+	// fmt.Printf("user: %+v\n", user)
+	// os.Exit(1)
+
+	// // ErrRecordNotFoundが出ない -> 登録出来ない
+	// if !errors.Is(err, gorm.ErrRecordNotFound) {
+	// 	models.SendErrorResponse(w, "Email address is already in use", http.StatusBadRequest)
+	// 	return
+	// }
 
 	// ユーザーを登録する準備
 	var createUser models.User
