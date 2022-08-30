@@ -32,6 +32,8 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 	// Jsonでくるので、まずGoで使用できるようにする
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
+		models.SendErrorResponse(w, "Unable to read body", http.StatusBadRequest)
+		log.Println(err)
 		return
 	}
 	var signupUser models.UserSignupVaridation
@@ -103,5 +105,45 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 
 // サインイン(ログイン)
 func signinFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("OK")
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		models.SendErrorResponse(w, "Unable to read body", http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	var signinUser models.UserSigninVaridation
+	if err := json.Unmarshal(reqBody, &signinUser); err != nil {
+		models.SendErrorResponse(w, "Unable to unmarshal json", http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	// バリデーションの実施
+	ok, result := signinUser.SigninVaridator()
+
+	if !ok {
+		models.SendErrorResponse(w, result, http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	// ユーザーがいるかどうかチェック
+	// if err := models.GetUserByEmail(user, user.Email); err != nil {
+	// 	models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
+	// 	log.Println(err)
+	// 	return
+	// }
+
+	// ここでログインユーザーを取得出来たのでuserを使ってく
+	// bcryptでDBはハッシュかしているので比較する関数
+	// bcrypt.CompareHashAndPassword(user.Password)
+
 }
+
+// メールアドレスとパスワードを入れる
+// ↓
+// メールアドレスでクエリを投げて問い合わせる
+// ↓
+// 一致していれば該当UserとJWTを返却する
