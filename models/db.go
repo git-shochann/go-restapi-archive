@@ -14,11 +14,12 @@ var DB *gorm.DB
 var err error
 
 type User struct {
-	gorm.Model        // ID, CreatedAt, UpdatedAt, DeletedAt を作成
-	FirstName  string `gorm:"not null"`
-	LastName   string `gorm:"not null"`
-	Email      string `gorm:"not null;unique"`
-	Password   string `gorm:"not null"`
+	gorm.Model         // ID, CreatedAt, UpdatedAt, DeletedAt を作成
+	FirstName  string  `gorm:"not null"`
+	LastName   string  `gorm:"not null"`
+	Email      string  `gorm:"not null;unique"`
+	Password   string  `gorm:"not null"`
+	Habit      []Habit // User has many Habit
 }
 
 type Habit struct {

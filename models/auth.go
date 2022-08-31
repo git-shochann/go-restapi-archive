@@ -54,3 +54,7 @@ func (u *User) WIP() (string, error) {
 	return jwtToken, nil
 
 }
+
+func CheckJWTToken() {
+
+}
