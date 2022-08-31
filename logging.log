@@ -13,3 +13,19 @@
 2022/08/31 17:12:21 db.go:43: Enable Connect to DB: driver: bad connection
 2022/08/31 17:13:02 server.go:93: Error 1062: Duplicate entry '' for key 'users.email'
 2022/08/31 17:14:15 server.go:93: Error 1062: Duplicate entry '' for key 'users.email'
+2022/08/31 17:42:11 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:42:13 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:42:15 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:42:16 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:42:23 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:42:44 server.go:94: Error 1062: Duplicate entry 'test@gmail.com' for key 'users.email'
+2022/08/31 17:46:00 server.go:142: record not found
+2022/08/31 17:46:09 server.go:151: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 17:47:12 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 17:52:44 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 17:53:44 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 18:34:30 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 18:35:02 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 18:35:37 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 18:39:42 server.go:157: crypto/bcrypt: hashedSecret too short to be a bcrypted password
+2022/08/31 18:43:07 server.go:161: crypto/bcrypt: hashedSecret too short to be a bcrypted password
