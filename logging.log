@@ -9,3 +9,7 @@
 2022/08/30 14:21:21 server.go:64: record not found
 2022/08/30 14:21:28 server.go:64: record not found
 2022/08/30 14:34:11 server.go:63: record not found
+2022/08/31 17:08:57 server.go:66: record not found
+2022/08/31 17:12:21 db.go:43: Enable Connect to DB: driver: bad connection
+2022/08/31 17:13:02 server.go:93: Error 1062: Duplicate entry '' for key 'users.email'
+2022/08/31 17:14:15 server.go:93: Error 1062: Duplicate entry '' for key 'users.email'

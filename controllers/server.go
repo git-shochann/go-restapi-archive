@@ -55,34 +55,34 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 既存ユーザーがEmailを使用していないかチェック
-	var user models.User
+	// // 既存ユーザーがEmailを使用していないかチェック
+	// var user models.User
 
 	// メールアドレスがある -> 登録NG / メールアドレスがない -> 登録OK
-	err = models.GetUserByEmail(user, signupUser.Email)
-	// BUG: errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
-	if err != nil {
-		models.SendErrorResponse(w, "Something wrong", http.StatusInternalServerError)
-		log.Println(err)
-		return
-	}
-
-	// userの値があるかどうかでチェックする
-	// fmt.Printf("user: %+v\n", user)
-	// os.Exit(1)
-
-	// // ErrRecordNotFoundが出ない -> 登録出来ない
-	// if !errors.Is(err, gorm.ErrRecordNotFound) {
-	// 	models.SendErrorResponse(w, "Email address is already in use", http.StatusBadRequest)
+	// err = models.GetUserByEmail(user, signupUser.Email)
+	// errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
+	// if err != nil {
+	// 	models.SendErrorResponse(w, "Something wrong", http.StatusInternalServerError)
+	// 	log.Println(err)
 	// 	return
 	// }
 
+	// // userの値があるかどうかでチェックする
+	// // fmt.Printf("user: %+v\n", user)
+	// // os.Exit(1)
+
+	// // // ErrRecordNotFoundが出ない -> 登録出来ない
+	// // if !errors.Is(err, gorm.ErrRecordNotFound) {
+	// // 	models.SendErrorResponse(w, "Email address is already in use", http.StatusBadRequest)
+	// // 	return
+	// // }
+
 	// ユーザーを登録する準備
 	var createUser models.User
-	createUser.FirstName = user.FirstName
-	createUser.LastName = user.LastName
-	createUser.Email = user.Email
-	createUser.Password = models.EncryptPassword(user.Password)
+	createUser.FirstName = signupUser.FirstName
+	createUser.LastName = signupUser.LastName
+	createUser.Email = signupUser.Email
+	createUser.Password = models.EncryptPassword(signupUser.Password)
 
 	fmt.Printf("createUser: %v\n", createUser)
 	fmt.Printf("&createUser: %v\n", &createUser)
@@ -94,7 +94,7 @@ func signupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 成功！
+	// 成功！ -> なぜ登録出来なかったのかもう少し詳細のメッセージがあっていいかも。
 	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
 		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 		log.Println(err)
