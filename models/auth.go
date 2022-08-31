@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
@@ -55,6 +56,9 @@ func (u *User) WIP() (string, error) {
 
 }
 
-func CheckJWTToken() {
+// リクエスト時のJWTTokenの検証
+func CheckJWTToken(r *http.Request) {
+
+	// リクエストヘッダーの取得する
 
 }

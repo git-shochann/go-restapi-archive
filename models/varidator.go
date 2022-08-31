@@ -40,7 +40,7 @@ func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
 	return true, errorMessage
 }
 
-// ログインでもバリデーション必要？
+// ログインのバリデーション
 type UserSigninVaridation struct {
 	Email    string `json:"email" validate:"required,email"`
 	Password string `json:"password" validate:"required,min=8,max=15,lowercase"` // TODO: 上記と同様
@@ -61,6 +61,32 @@ func (u UserSigninVaridation) SigninVaridator() (ok bool, errMessage string) {
 				errorMessage = "Invalid Email"
 			case "Password":
 				errorMessage = "Invalid Password"
+			}
+		}
+		return false, errorMessage
+	}
+	return true, errorMessage
+}
+
+// 習慣を登録するときのバリデーション
+type CreateHabitVaridation struct {
+	Content string `json:"habit" validate:"required"`
+}
+
+func (c CreateHabitVaridation) CreateHabitVaridator() (ok bool, errMessage string) {
+	validate := validator.New()
+	err := validate.Struct(&c)
+
+	var errorMessage string
+
+	if err != nil {
+		for _, fieldErr := range err.(validator.ValidationErrors) {
+			fieldName := fieldErr.Field()
+
+			switch fieldName {
+			case "Content":
+				errorMessage = "Invalid Content"
+
 			}
 		}
 		return false, errorMessage
