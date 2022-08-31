@@ -28,8 +28,6 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// fmt.Printf("signupUser: %v\n", signupUser)
-
 	ok, result := signupUser.SignupVaridator()
 
 	// false時の処理
@@ -38,28 +36,6 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		log.Printf("result: %v\n", result)
 		return
 	}
-
-	// // 既存ユーザーがEmailを使用していないかチェック
-	// var user models.User
-
-	// メールアドレスがある -> 登録NG / メールアドレスがない -> 登録OK
-	// err = models.GetUserByEmail(user, signupUser.Email)
-	// errに値が入り、Record not found が返ってきてしまう -> ただそれはOKとしたい -> ただなんらかのエラーもエラーハンドリングすべき
-	// if err != nil {
-	// 	models.SendErrorResponse(w, "Something wrong", http.StatusInternalServerError)
-	// 	log.Println(err)
-	// 	return
-	// }
-
-	// // userの値があるかどうかでチェックする
-	// // fmt.Printf("user: %+v\n", user)
-	// // os.Exit(1)
-
-	// // // ErrRecordNotFoundが出ない -> 登録出来ない
-	// // if !errors.Is(err, gorm.ErrRecordNotFound) {
-	// // 	models.SendErrorResponse(w, "Email address is already in use", http.StatusBadRequest)
-	// // 	return
-	// // }
 
 	// ユーザーを登録する準備
 	var createUser models.User
