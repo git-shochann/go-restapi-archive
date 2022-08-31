@@ -19,7 +19,7 @@ type User struct {
 	LastName   string  `gorm:"not null"`
 	Email      string  `gorm:"not null;unique"`
 	Password   string  `gorm:"not null"`
-	Habit      []Habit // User has many Habit
+	Habits     []Habit // User has many Habit
 }
 
 type Habit struct {

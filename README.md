@@ -39,7 +39,7 @@ done!
 2, ローカルから MySQL のコンテナを作成後、コンテナの MySQL を操作する
 
 ```shell
-    docker-compose up -d # コンテナの作成
+    docker-compose up -d # コンテナの作成 -d -> バックグランドで実行
     docker exec -it mysql_db bash # コンテナに入る
     mysql -u root -p # DBに接続
     show databases; # DBを表示
