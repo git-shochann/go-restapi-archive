@@ -70,7 +70,7 @@ func (u UserSigninVaridation) SigninVaridator() (ok bool, errMessage string) {
 
 // 習慣を登録するときのバリデーション
 type CreateHabitVaridation struct {
-	Content string `json:"habit" validate:"required"`
+	Content string `json:"content" validate:"required"`
 }
 
 func (c CreateHabitVaridation) CreateHabitVaridator() (ok bool, errMessage string) {

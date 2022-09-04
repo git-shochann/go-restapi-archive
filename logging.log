@@ -60,3 +60,5 @@
 2022/09/01 01:56:07 db.go:44: Enable Connect to DB: driver: bad connection
 2022/09/01 01:56:08 db.go:44: Enable Connect to DB: driver: bad connection
 2022/09/01 01:56:09 db.go:44: Enable Connect to DB: driver: bad connection
+2022/09/04 14:50:42 auth.go:53: Error 1062: Duplicate entry 'test@gmail.com' for key 'users.email'
+2022/09/04 15:07:24 habit.go:27: unexpected end of JSON input

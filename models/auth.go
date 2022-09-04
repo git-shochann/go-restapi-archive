@@ -39,9 +39,27 @@ func (u *User) CreateJWTToken() (string, error) {
 
 // これでも書ける
 func (u *User) WIP() (string, error) {
+
 	token := jwt.New(jwt.SigningMethodHS256)
 
-	claims := token.Claims.(jwt.MapClaims) // ?
+	// func New(method SigningMethod) *Token {
+	//	return NewWithClaims(method, MapClaims{}) // ここでMapClaims{}が返ってくる
+	// }
+
+	// type Token struct {
+
+	// インターフェース型 interface{} Claimsインターフェース これも型なので実際の型は持っていない
+	// 	Claims Claims
+	// }
+
+	// type Claims interface {
+	//	Valid() error
+	// }
+
+	// type MapClaims map[string]interface{}
+
+	// 型アサーションをする　interface型 -> 元の型にしてあげる
+	claims := token.Claims.(jwt.MapClaims)
 	claims["user_id"] = u.ID
 	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
@@ -59,6 +77,8 @@ func (u *User) WIP() (string, error) {
 // リクエスト時のJWTTokenの検証
 func CheckJWTToken(r *http.Request) {
 
-	// リクエストヘッダーの取得する
+	// リクエスト構造体を渡す -> リクエストヘッダーの取得する
+	fmt.Printf("r.Header: %+v\n", r.Header) // type Header map[string][]string
+	os.Exit(1)
 
 }
