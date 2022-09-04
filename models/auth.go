@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
@@ -77,8 +78,14 @@ func (u *User) WIP() (string, error) {
 // リクエスト時のJWTTokenの検証
 func CheckJWTToken(r *http.Request) {
 
-	// リクエスト構造体を渡す -> リクエストヘッダーの取得する
-	fmt.Printf("r.Header: %+v\n", r.Header) // type Header map[string][]string
-	os.Exit(1)
+	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
+
+	bearerTokenStr := r.Header["Authorization"][0]
+	fmt.Printf("token: %#v\n", bearerTokenStr)                    // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
+	token := strings.Split(bearerTokenStr, "Bearer ")             // 第二引数: 何で分割したいのか？
+	fmt.Println(token)                                            // jifdaslkjhdafskjhksdfhakfdk
+	jwt.Parse(token[0], func(t *jwt.Token) (interface{}, error) { // 第二引数に関数 -> 引数に *jwt.Token型で戻り値を取
+
+	})
 
 }
