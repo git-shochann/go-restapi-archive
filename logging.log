@@ -62,3 +62,43 @@
 2022/09/01 01:56:09 db.go:44: Enable Connect to DB: driver: bad connection
 2022/09/04 14:50:42 auth.go:53: Error 1062: Duplicate entry 'test@gmail.com' for key 'users.email'
 2022/09/04 15:07:24 habit.go:27: unexpected end of JSON input
+2022/09/05 23:13:09 server.go:3159: http: panic serving [::1]:51928: runtime error: invalid memory address or nil pointer dereference
+goroutine 37 [running]:
+net/http.(*conn).serve.func1(0x14000115040)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1050efca0, 0x1053a78b0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x140001b0100)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:99 +0x1c4
+go-rest-api/controllers.CreateHabitFunc({0x10514b860, 0x1400059a000}, 0x140001b0100)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:30 +0x1ec
+net/http.HandlerFunc.ServeHTTP(0x105140af8, {0x10514b860, 0x1400059a000}, 0x140001b0100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140004b0000, {0x10514b860, 0x1400059a000}, 0x14000580200)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140004b6000}, {0x10514b860, 0x1400059a000}, 0x14000580200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000115040, {0x10514db00, 0x1400011b410})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/05 23:16:16 server.go:3159: http: panic serving [::1]:51991: runtime error: invalid memory address or nil pointer dereference
+goroutine 26 [running]:
+net/http.(*conn).serve.func1(0x1400046adc0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x10445fca0, 0x1047178b0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000490300)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:100 +0x1c4
+go-rest-api/controllers.CreateHabitFunc({0x1044bb860, 0x140006940e0}, 0x14000490300)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:30 +0x1ec
+net/http.HandlerFunc.ServeHTTP(0x1044b0af8, {0x1044bb860, 0x140006940e0}, 0x14000490300)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x14000690000, {0x1044bb860, 0x140006940e0}, 0x14000490100)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000694000}, {0x1044bb860, 0x140006940e0}, 0x14000490100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400046adc0, {0x1044bdb40, 0x1400011bc80})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8

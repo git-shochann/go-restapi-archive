@@ -81,11 +81,26 @@ func CheckJWTToken(r *http.Request) {
 	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
 
 	bearerTokenStr := r.Header["Authorization"][0]
-	fmt.Printf("token: %#v\n", bearerTokenStr)                    // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
-	token := strings.Split(bearerTokenStr, "Bearer ")             // 第二引数: 何で分割したいのか？
-	fmt.Println(token)                                            // jifdaslkjhdafskjhksdfhakfdk
-	jwt.Parse(token[0], func(t *jwt.Token) (interface{}, error) { // 第二引数に関数 -> 引数に *jwt.Token型で戻り値を取
+	fmt.Printf("token: %#v\n", bearerTokenStr)             // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
+	tokenSlice := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかでやる
+	fmt.Println(tokenSlice)                                // jifdaslkjhdafskjhksdfhakfdk
 
+	// 解析されたトークンを返却する
+	token, err := jwt.Parse(tokenSlice[0], func(token *jwt.Token) (interface{}, error) { // 第二引数 -> 無名関数
+
+		fmt.Println("Hello!")
+		// エンコード時のalgが同一かの検証
+		// 型アサーションをおこなっている
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(os.Getenv("JWTSIGNKEY")), nil
 	})
 
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		fmt.Println(claims["user_id"])
+		fmt.Println(claims["exp"])
+	} else {
+		fmt.Println(err)
+	}
 }
