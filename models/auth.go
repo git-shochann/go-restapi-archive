@@ -77,7 +77,7 @@ func (u *User) WIP() (string, error) {
 }
 
 // リクエスト時のJWTTokenの検証
-func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
+func CheckJWTToken(r *http.Request) (int, error) {
 
 	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
 
@@ -85,7 +85,7 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 	bearerTokenStr := r.Header.Get("Authorization")
 	if bearerTokenStr == "" {
 		err := errors.New("missing token") // errorインターフェースの作成
-		return nil, err
+		return 0, err
 	}
 
 	fmt.Printf("token: %#v\n", bearerTokenStr)             // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
@@ -109,20 +109,50 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 
 	})
 
-	fmt.Printf("type and value: parsedToken: %+T, %+v\n", parsedToken.Claims, parsedToken.Claims) // -> Claimsインターフェース -> 元の型 -> // map[exp:1.662545596e+09 user_id:1] -> {"user_id":1}
+	// jwt.MapClaimsだけどここの型はインターフェース -> map[exp:1.662545596e+09 user_id:1] -> {"user_id":1}
+	// 型アサーションが必要だけどなぜこうなる？
+	fmt.Printf("type and value of parsedToken: %+T, %+v\n", parsedToken.Claims, parsedToken.Claims)
 
 	// 何らかのエラー
 	if err != nil {
-		return nil, err // WIP
+		return 0, err
 	}
 
 	// これは？
 	if !parsedToken.Valid {
 		err := errors.New("invalid token")
-		return nil, err
+		return 0, err
 	}
 
 	// user_idを取り出したい
+	// 型アサーション -> falseだった時の処理をやっぱり加えた方がいいか？
+	assertionToken, ok := parsedToken.Claims.(jwt.MapClaims)
+	fmt.Printf("value: %+v\n", assertionToken)
+	if !ok {
+		err := errors.New("something wrong")
+		return 0, err
+	}
 
-	return parsedToken, nil
+	// map[string]interface{} -> {"string":"interface{}"}
+	// mapのバリューに対してのアクセス -> map名["key"]
+	// fmt.Printf("value[\"user_id\"]: %v\n", value["user_id"])
+
+	// これだとまだ以下userIDはinterface型であり, int型ではない。
+	// userID := value["user_id"]
+
+	// 型を確認 -> float64と返ってくる！
+	// fmt.Printf("type: assertionToken[\"user_id\"]: %T\n", assertionToken["user_id"])
+
+	// 再度型アサーション
+	assertionUserID, ok := assertionToken["user_id"].(float64)
+	if !ok {
+		err := errors.New("something wrong")
+		return 0, err
+	}
+
+	// 一応user_idを返す いずれ必要であれば*Tokenを返してあげる
+	// return parsedToken, nil
+
+	// 型キャスト
+	return int(assertionUserID), nil
 }
