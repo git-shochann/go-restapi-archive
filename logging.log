@@ -152,3 +152,22 @@ created by net/http.(*Server).Serve
 2022/09/06 19:06:40 habit.go:34: something wrong
 2022/09/06 19:07:15 habit.go:34: something wrong
 2022/09/06 19:08:06 habit.go:34: something wrong
+2022/09/06 19:11:26 habit.go:35: something wrong
+2022/09/06 19:12:14 habit.go:36: something wrong
+2022/09/06 19:13:13 auth.go:105: record not found
+2022/09/06 19:13:29 habit.go:36: something wrong
+2022/09/06 19:13:47 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:22:05 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:22:44 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:23:14 habit.go:36: tokenstring should not contain 'bearer '
+2022/09/06 19:23:41 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:23:52 habit.go:36: tokenstring should not contain 'bearer '
+2022/09/06 19:28:18 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:28:42 habit.go:36: token contains an invalid number of segments
+2022/09/06 19:31:15 habit.go:36: signature method invalid
+2022/09/06 19:39:24 habit.go:36: key is of invalid type
+2022/09/06 19:40:55 habit.go:37: key is of invalid type
+2022/09/06 19:47:46 habit.go:37: key is of invalid type
+2022/09/06 19:51:33 habit.go:37: !!!
+2022/09/06 20:09:41 habit.go:37: key is of invalid type
+2022/09/06 21:28:28 habit.go:37: key is of invalid type

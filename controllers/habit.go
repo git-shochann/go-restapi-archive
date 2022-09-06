@@ -19,6 +19,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
 	var habit models.CreateHabitVaridation
 	err = json.Unmarshal(reqBody, &habit)
 	if err != nil {
@@ -26,15 +27,19 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+	fmt.Println(habit) // Hello
 
 	// JWTの検証
 	token, err := models.CheckJWTToken(r)
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
 		log.Println(err)
 		return
 	}
 	fmt.Printf("token: %v\n", token)
-	fmt.Println("OK!")
+	fmt.Println("JWTの検証完了!!")
+
+	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
 }

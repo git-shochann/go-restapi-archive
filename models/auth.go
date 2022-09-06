@@ -89,27 +89,31 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 	}
 
 	fmt.Printf("token: %#v\n", bearerTokenStr)             // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
-	tokenSlice := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかで処理を行う
+	splitToken := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかで処理を行う 分割した結果をスライスの中に突っ込む
+
+	// stringのスライス
+	// ["","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI1NDU1OTYsInVzZXJfaWQiOjF9.B1PMPvxl4aGDaJXwXvZPJXxluh5S4lmiq5oen1KWiaU"]
+	fmt.Printf("splitToken: %v\n", splitToken)
 
 	// ここのtokenはどこで取れる？
-	parsedToken, err := jwt.Parse(tokenSlice[0], func(token *jwt.Token) (interface{}, error) {
+	parsedToken, err := jwt.Parse(splitToken[1], func(token *jwt.Token) (interface{}, error) {
 
 		// 型アサーション -> algの検証を行う
-		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			err := errors.New("signature method invalid")
 			return nil, err
 		}
 
-		return os.Getenv("JWTSIGNKEY"), nil
+		// 暗号鍵を返さなくてないいけないとドキュメントに書いてある。SigningMethodHMACのキーは[]byteで返してあげる
+		return []byte(os.Getenv("JWTSIGNKEY")), nil
 
 	})
 
-	fmt.Printf("parsedToken: %v\n", parsedToken)
+	fmt.Printf("parsedToken: %+v\n", parsedToken.Claims) // map[exp:1.662545596e+09 user_id:1] -> {"user_id":1}
 
 	// 何らかのエラー
 	if err != nil {
-		err := errors.New("something wrong")
-		return nil, err
+		return nil, err // WIP
 	}
 
 	// これは？
@@ -117,6 +121,8 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 		err := errors.New("invalid token")
 		return nil, err
 	}
+
+	// user_idを取り出したい
 
 	return parsedToken, nil
 }
