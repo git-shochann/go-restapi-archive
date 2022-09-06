@@ -109,7 +109,7 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 
 	})
 
-	fmt.Printf("parsedToken: %+v\n", parsedToken.Claims) // map[exp:1.662545596e+09 user_id:1] -> {"user_id":1}
+	fmt.Printf("type and value: parsedToken: %+T, %+v\n", parsedToken.Claims, parsedToken.Claims) // -> Claimsインターフェース -> 元の型 -> // map[exp:1.662545596e+09 user_id:1] -> {"user_id":1}
 
 	// 何らかのエラー
 	if err != nil {
