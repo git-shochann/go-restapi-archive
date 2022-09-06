@@ -102,3 +102,53 @@ net/http.(*conn).serve(0x1400046adc0, {0x1044bdb40, 0x1400011bc80})
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
 created by net/http.(*Server).Serve
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/06 17:34:03 server.go:3159: http: panic serving [::1]:53923: runtime error: invalid memory address or nil pointer dereference
+goroutine 39 [running]:
+net/http.(*conn).serve.func1(0x14000142320)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x10261bca0, 0x1028d38b0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:100 +0x1ac
+go-rest-api/controllers.CreateHabitFunc({0x102677860, 0x14000526000}, 0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:30 +0x1ec
+net/http.HandlerFunc.ServeHTTP(0x10266caf8, {0x102677860, 0x14000526000}, 0x14000230200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x14000078000, {0x102677860, 0x14000526000}, 0x14000230000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x1400012e000}, {0x102677860, 0x14000526000}, 0x14000230000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000142320, {0x102679b40, 0x140001d5f50})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/06 18:47:17 server.go:3159: http: panic serving [::1]:54960: runtime error: index out of range [0] with length 0
+goroutine 51 [running]:
+net/http.(*conn).serve.func1(0x140000a88c0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x102f456e0, 0x14000018570})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x140000c0800)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:84 +0x294
+go-rest-api/controllers.CreateHabitFunc({0x102f6f8e0, 0x140000c81c0}, 0x140000c0800)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:30 +0x1ec
+net/http.HandlerFunc.ServeHTTP(0x102f64b98, {0x102f6f8e0, 0x140000c81c0}, 0x140000c0800)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140005a4000, {0x102f6f8e0, 0x140000c81c0}, 0x140000c0600)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140005a8000}, {0x102f6f8e0, 0x140000c81c0}, 0x140000c0600)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140000a88c0, {0x102f71bc0, 0x140001a52c0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/06 18:52:56 habit.go:34: トークンがありません。
+2022/09/06 18:53:10 habit.go:34: token contains an invalid number of segments
+2022/09/06 18:53:37 habit.go:34: token contains an invalid number of segments
+2022/09/06 18:57:02 habit.go:34: 何らかのエラーが発生しました
+2022/09/06 18:58:20 habit.go:34: 何らかのエラーが発生しました
+2022/09/06 18:58:35 habit.go:34: 何らかのエラーが発生しました
+2022/09/06 19:06:14 habit.go:34: something wrong
+2022/09/06 19:06:40 habit.go:34: something wrong
+2022/09/06 19:07:15 habit.go:34: something wrong
+2022/09/06 19:08:06 habit.go:34: something wrong

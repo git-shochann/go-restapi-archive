@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -76,31 +77,46 @@ func (u *User) WIP() (string, error) {
 }
 
 // リクエスト時のJWTTokenの検証
-func CheckJWTToken(r *http.Request) {
+func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 
 	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
 
-	bearerTokenStr := r.Header["Authorization"][0]
+	// Authorizationヘッダーにあるかどうか確認
+	bearerTokenStr := r.Header.Get("Authorization")
+	if bearerTokenStr == "" {
+		err := errors.New("missing token") // errorインターフェースの作成
+		return nil, err
+	}
+
 	fmt.Printf("token: %#v\n", bearerTokenStr)             // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
-	tokenSlice := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかでやる
-	fmt.Println(tokenSlice)                                // jifdaslkjhdafskjhksdfhakfdk
+	tokenSlice := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかで処理を行う
 
-	// 解析されたトークンを返却する
-	token, err := jwt.Parse(tokenSlice[0], func(token *jwt.Token) (interface{}, error) { // 第二引数 -> 無名関数
+	// ここのtokenはどこで取れる？
+	parsedToken, err := jwt.Parse(tokenSlice[0], func(token *jwt.Token) (interface{}, error) {
 
-		fmt.Println("Hello!")
-		// エンコード時のalgが同一かの検証
-		// 型アサーションをおこなっている
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		// 型アサーション -> algの検証を行う
+		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
+			err := errors.New("signature method invalid")
+			return nil, err
 		}
-		return []byte(os.Getenv("JWTSIGNKEY")), nil
+
+		return os.Getenv("JWTSIGNKEY"), nil
+
 	})
 
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		fmt.Println(claims["user_id"])
-		fmt.Println(claims["exp"])
-	} else {
-		fmt.Println(err)
+	fmt.Printf("parsedToken: %v\n", parsedToken)
+
+	// 何らかのエラー
+	if err != nil {
+		err := errors.New("something wrong")
+		return nil, err
 	}
+
+	// これは？
+	if !parsedToken.Valid {
+		err := errors.New("invalid token")
+		return nil, err
+	}
+
+	return parsedToken, nil
 }
