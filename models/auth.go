@@ -95,7 +95,7 @@ func CheckJWTToken(r *http.Request) (*jwt.Token, error) {
 	// ["","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI1NDU1OTYsInVzZXJfaWQiOjF9.B1PMPvxl4aGDaJXwXvZPJXxluh5S4lmiq5oen1KWiaU"]
 	fmt.Printf("splitToken: %v\n", splitToken)
 
-	// ここのtokenはどこで取れる？
+	// ここのtoken -> 無名関数である(あくまで関数の定義) -> Parse()の内部処理で使用する -> tokenの値を使用可能 -> 関数の説明をしっかり読めば分かる
 	parsedToken, err := jwt.Parse(splitToken[1], func(token *jwt.Token) (interface{}, error) {
 
 		// 型アサーション -> algの検証を行う
