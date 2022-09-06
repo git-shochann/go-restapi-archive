@@ -30,15 +30,14 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(habit) // Hello
 
 	// JWTの検証
-	token, err := models.CheckJWTToken(r)
+	userID, err := models.CheckJWTToken(r)
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
 	}
-	fmt.Printf("token: %v\n", token)
-	fmt.Println("JWTの検証完了!!")
+	// fmt.Println("JWTの検証完了!!")
 
 	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
