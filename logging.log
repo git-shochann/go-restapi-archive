@@ -171,3 +171,48 @@ created by net/http.(*Server).Serve
 2022/09/06 19:51:33 habit.go:37: !!!
 2022/09/06 20:09:41 habit.go:37: key is of invalid type
 2022/09/06 21:28:28 habit.go:37: key is of invalid type
+2022/09/07 15:23:37 habit.go:88: unexpected end of JSON input
+2022/09/07 15:24:47 habit.go:90: unexpected end of JSON input
+2022/09/07 15:24:52 habit.go:80: missing token
+2022/09/07 15:25:04 server.go:3159: http: panic serving [::1]:60076: runtime error: index out of range [1] with length 1
+goroutine 27 [running]:
+net/http.(*conn).serve.func1(0x14000195680)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1033f16a0, 0x140000ce408})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:99 +0x4dc
+go-rest-api/controllers.DeteteHabitFunc({0x10341b8c0, 0x1400007a000}, 0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:76 +0x30
+net/http.HandlerFunc.ServeHTTP(0x103410b60, {0x10341b8c0, 0x1400007a000}, 0x14000230200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x14000184000, {0x10341b8c0, 0x1400007a000}, 0x14000120400)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140001a4000}, {0x10341b8c0, 0x1400007a000}, 0x14000120400)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000195680, {0x10341dba0, 0x1400019b710})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/07 15:25:12 server.go:3159: http: panic serving [::1]:60081: runtime error: index out of range [1] with length 1
+goroutine 37 [running]:
+net/http.(*conn).serve.func1(0x14000142320)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x102b196a0, 0x14000018138})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:99 +0x4dc
+go-rest-api/controllers.DeteteHabitFunc({0x102b438c0, 0x1400007a000}, 0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:76 +0x30
+net/http.HandlerFunc.ServeHTTP(0x102b38b60, {0x102b438c0, 0x1400007a000}, 0x14000230200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140004fe000, {0x102b438c0, 0x1400007a000}, 0x14000230000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000070000}, {0x102b438c0, 0x1400007a000}, 0x14000230000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000142320, {0x102b45ba0, 0x140004d7e60})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/07 15:26:53 habit.go:105: Error 1054: Unknown column 'habitid' in 'where clause'
+2022/09/07 15:27:34 habit.go:108: Error 1054: Unknown column 'habitid' in 'where clause'

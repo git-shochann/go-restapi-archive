@@ -7,6 +7,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 // 100%ではなくまずは完了させることを目指す！
@@ -66,4 +69,42 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	models.SendResponse(w, response, http.StatusOK)
+}
+
+func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
+
+	userID, err := models.CheckJWTToken(r)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+	fmt.Println("JWTの検証完了!!")
+
+	// 確認したJWTのクレームのuser_id
+	// パスパラメーターから取得する habitのid
+	vars := mux.Vars(r)
+	fmt.Printf("vars: %v\n", vars) // vars: map[id:1]
+	habitIDStr := vars["id"]
+
+	habitID, err := strconv.Atoi(habitIDStr)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	var habit models.Habit
+
+	err = models.DeleteHabit(userID, habitID, habit)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+	models.SendResponse(w, nil, http.StatusOK)
+
 }

@@ -14,6 +14,7 @@ func StartServer() {
 	router.HandleFunc("/api/v1/signup", SignupFunc).Methods("POST")
 	router.HandleFunc("/api/v1/signin", SigninFunc).Methods("POST")
 	router.HandleFunc("/api/v1/create", CreateHabitFunc).Methods("POST")
+	router.HandleFunc("/api/v1/delete/{id}", DeteteHabitFunc).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 

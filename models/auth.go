@@ -81,6 +81,7 @@ func CheckJWTToken(r *http.Request) (int, error) {
 
 	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
 
+	// BUG: auhotrizationが別の種類だとpanic発生する
 	// Authorizationヘッダーにあるかどうか確認
 	bearerTokenStr := r.Header.Get("Authorization")
 	if bearerTokenStr == "" {
