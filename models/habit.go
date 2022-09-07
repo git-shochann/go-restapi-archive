@@ -14,7 +14,7 @@ func (h Habit) CreateHabit() error {
 
 }
 
-// WIP
+// WIP!
 func DeleteHabit(habitID, userID int, habit Habit) error {
 
 	// &habitが必要なのはなぜ？
