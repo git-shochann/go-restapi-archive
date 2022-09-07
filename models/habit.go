@@ -5,7 +5,7 @@ import (
 )
 
 func (h Habit) CreateHabit() error {
-	// ポインタを渡して実態を書き換える
+	// ポインタを渡して実体を書き換える
 	if err := DB.Create(&h).Error; err != nil {
 		return err
 	}
@@ -32,14 +32,15 @@ func (h Habit) UpdateHabit() error {
 	return nil
 }
 
-// 実態を受け取って、実態を書き換えるので、戻り値に指定する必要はない。
-func (u User) GetAllHabitByUserID(habit []Habit) error {
+//実体を受け取って、実体を書き換えるので、戻り値に指定する必要はない。
+// 旧: 値渡し, 新: ポインタを受け取る！
+func (u User) GetAllHabitByUserID(habit *[]Habit) error {
 	// habitテーブル内の外部キーであるuseridで全てを取得する
-	fmt.Printf("u.ID: %v\n", u.ID)     // 1
-	fmt.Printf("[]habit: %v\n", habit) // 空の構造体
+	// fmt.Printf("u.ID: %v\n", u.ID)     // 1
+	// fmt.Printf("[]habit: %v\n", habit) // 空の構造体
 
 	// 全て取得したい
-	if err := DB.Where("user_id = ?", u.ID).Find(&habit).Error; err != nil {
+	if err := DB.Where("user_id = ?", u.ID).Find(habit).Error; err != nil {
 		// ここの戻り値
 		return err
 	}

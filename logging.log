@@ -222,3 +222,39 @@ created by net/http.(*Server).Serve
 2022/09/07 17:01:29 habit.go:172: missing token
 2022/09/07 17:04:47 habit.go:207: record not found
 2022/09/07 17:05:58 habit.go:207: record not found
+2022/09/07 18:24:53 server.go:3159: http: panic serving [::1]:61605: reflect: reflect.Value.Set using unaddressable value
+goroutine 39 [running]:
+net/http.(*conn).serve.func1(0x1400019e140)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x100568de0, 0x140001c5170})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+github.com/jinzhu/gorm.(*Scope).callCallbacks.func1(0x14000239680)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:865 +0x98
+panic({0x100568de0, 0x140001c5170})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1038 +0x21c
+reflect.flag.mustBeAssignableSlow(0x97)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/reflect/value.go:262 +0xac
+reflect.flag.mustBeAssignable(...)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/reflect/value.go:249
+reflect.Value.Set({0x100563540, 0x100880420, 0x97}, {0x100563540, 0x140000a3470, 0x97})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/reflect/value.go:1899 +0x34
+github.com/jinzhu/gorm.queryCallback(0x14000239680)
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/callback_query.go:48 +0x5b4
+github.com/jinzhu/gorm.(*Scope).callCallbacks(0x14000239680, {0x140002358c0, 0x3, 0x4})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:869 +0x80
+github.com/jinzhu/gorm.(*DB).Find(0x140000a4f70, {0x100563540, 0x100880420}, {0x0, 0x0, 0x0})
+	/Users/sho/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:354 +0x25c
+go-rest-api/models.User.GetAllHabitByUserID({{0x1, {0x0, 0x0, 0x0}, {0x0, 0x0, 0x0}, 0x0}, {0x0, 0x0}, ...}, ...)
+	/Users/sho/Coding/go/src/go-rest-api/models/habit.go:43 +0xfc
+go-rest-api/controllers.GetAllHabitFunc({0x1005dfa00, 0x140000ce0e0}, 0x14000096300)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:202 +0x2e0
+net/http.HandlerFunc.ServeHTTP(0x1005d4c48, {0x1005dfa00, 0x140000ce0e0}, 0x14000096300)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140000c2000, {0x1005dfa00, 0x140000ce0e0}, 0x14000096100)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140000ce000}, {0x1005dfa00, 0x140000ce0e0}, 0x14000096100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400019e140, {0x1005e1ca0, 0x140001d4f60})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8

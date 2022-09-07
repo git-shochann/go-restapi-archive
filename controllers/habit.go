@@ -199,7 +199,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 	user.ID = uint(userID)
 
 	var habit []models.Habit
-	err = user.GetAllHabitByUserID(habit)
+	err = user.GetAllHabitByUserID(&habit) // 旧: 値を渡す, 新: ポインタ(アドレス)を渡すことでしっかりと返却された
 	if err != nil {
 		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
