@@ -31,3 +31,19 @@ func (h Habit) UpdateHabit() error {
 	}
 	return nil
 }
+
+// 実態を受け取って、実態を書き換えるので、戻り値に指定する必要はない。
+func (u User) GetAllHabitByUserID(habit []Habit) error {
+	// habitテーブル内の外部キーであるuseridで全てを取得する
+	fmt.Printf("u.ID: %v\n", u.ID)     // 1
+	fmt.Printf("[]habit: %v\n", habit) // 空の構造体
+
+	// 全て取得したい
+	if err := DB.Where("user_id = ?", u.ID).Find(&habit).Error; err != nil {
+		// ここの戻り値
+		return err
+	}
+	// ちゃんと返ってきてる
+	fmt.Printf("habit: %v\n", habit) // habit: [{{2 2022-09-07 04:47:29 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{3 2022-09-07 04:49:30 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaa false 1} {{4 2022-09-07 04:49:31 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{5 2022-09-07 04:50:22 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is testbbb false 1} {{6 2022-09-07 04:55:55 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaadsadsa false 1}]
+	return nil
+}

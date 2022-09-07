@@ -217,3 +217,8 @@ created by net/http.(*Server).Serve
 2022/09/07 15:26:53 habit.go:105: Error 1054: Unknown column 'habitid' in 'where clause'
 2022/09/07 15:27:34 habit.go:108: Error 1054: Unknown column 'habitid' in 'where clause'
 2022/09/07 15:55:48 habit.go:105: sql: expected 2 arguments, got 3
+2022/09/07 16:19:07 habit.go:94: strconv.Atoi: parsing "": invalid syntax
+2022/09/07 17:01:26 habit.go:172: missing token
+2022/09/07 17:01:29 habit.go:172: missing token
+2022/09/07 17:04:47 habit.go:207: record not found
+2022/09/07 17:05:58 habit.go:207: record not found

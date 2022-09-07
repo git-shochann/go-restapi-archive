@@ -89,6 +89,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	habitID, err := strconv.Atoi(habitIDStr)
 	if err != nil {
+		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
@@ -159,4 +160,61 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	models.SendResponse(w, response, http.StatusOK)
 
+}
+
+// ユーザー1人が持っているhabitを全て取得する
+func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
+
+	userID, err := models.CheckJWTToken(r)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+	fmt.Println("JWTの検証完了!!")
+
+	// パスパラメーターでuserid取得可能
+	vars := mux.Vars(r)
+	parameterUserIDStr := vars["id"]
+
+	parameterUserID, err := strconv.Atoi(parameterUserIDStr)
+	if err != nil {
+		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	// パスパラメーターのID + JWTで検証したIDが一致しなければエラー
+	if userID != parameterUserID {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	var user models.User
+	user.ID = uint(userID)
+
+	var habit []models.Habit
+	err = user.GetAllHabitByUserID(habit)
+	if err != nil {
+		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	response, err := json.Marshal(habit)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	models.SendResponse(w, response, http.StatusOK)
 }
