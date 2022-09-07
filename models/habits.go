@@ -14,10 +14,19 @@ func (h Habit) CreateHabit() error {
 
 }
 
-func DeleteHabit(userID, habitID int, habit Habit) error {
+// WIP
+func DeleteHabit(habitID, userID int, habit Habit) error {
 
 	// &habitが必要なのはなぜ？
-	if err := DB.Where("id = ?", habitID).Delete(&habit).Error; err != nil {
+	// 現在論理削除されているのに、再度削除処理が出来てしまう
+	if err := DB.Where("id = ? ", habitID).Delete(&habit).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (h Habit) UpdateHabit() error {
+	if err := DB.Model(&h).Update("content", h.Content).Error; err != nil {
 		return err
 	}
 	return nil

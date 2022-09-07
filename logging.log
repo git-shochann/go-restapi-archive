@@ -216,3 +216,4 @@ created by net/http.(*Server).Serve
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
 2022/09/07 15:26:53 habit.go:105: Error 1054: Unknown column 'habitid' in 'where clause'
 2022/09/07 15:27:34 habit.go:108: Error 1054: Unknown column 'habitid' in 'where clause'
+2022/09/07 15:55:48 habit.go:105: sql: expected 2 arguments, got 3

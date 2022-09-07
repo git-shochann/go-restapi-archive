@@ -20,8 +20,8 @@ done!
 | 機能               | メソッド | URI               | 権限 | 開発ステータス |
 | ------------------ | -------- | ----------------- | ---- | -------------- |
 | 習慣を登録する     | POST     | api/v1/create     | 有り | done!          |
-| 習慣を削除する     | DELETE   | api/v1/delete/:id | 有り |
-| 習慣を更新する     | POST     | api/v1/update     | 有り |
+| 習慣を削除する     | DELETE   | api/v1/delete/:id | 有り | done!          |
+| 習慣を更新する     | POST     | api/v1/update     | 有り | done!          |
 | 習慣を全て取得する | POST     | api/v1/get        | 有り |
 
 ## 使用する流れ

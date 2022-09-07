@@ -40,7 +40,6 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	// fmt.Println("JWTの検証完了!!")
 
 	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
@@ -98,7 +97,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	var habit models.Habit
 
-	err = models.DeleteHabit(userID, habitID, habit)
+	err = models.DeleteHabit(habitID, userID, habit)
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		fmt.Println("エラー！")
@@ -106,5 +105,58 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	models.SendResponse(w, nil, http.StatusOK)
+
+}
+
+func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
+
+	// Bodyを検証
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	var habitVaridation models.CreateHabitVaridation
+	err = json.Unmarshal(reqBody, &habitVaridation)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+	fmt.Println(habitVaridation)
+
+	// JWTの検証
+	userID, err := models.CheckJWTToken(r)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	var habit models.Habit
+	habit.Content = habitVaridation.Content
+	habit.UserID = userID
+
+	// アップデートに必要なのは、habitid, content, (後ほど...finished)
+
+	err = habit.UpdateHabit()
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	response, err := json.Marshal(habit)
+	if err != nil {
+		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		fmt.Println("エラー！")
+		log.Println(err)
+		return
+	}
+
+	models.SendResponse(w, response, http.StatusOK)
 
 }
