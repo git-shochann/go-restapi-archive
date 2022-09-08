@@ -79,25 +79,20 @@ func (u *User) WIP() (string, error) {
 // リクエスト時のJWTTokenの検証
 func CheckJWTToken(r *http.Request) (int, error) {
 
-	// リクエスト構造体を渡す -> リクエストヘッダーの取得する -> Header map[string][]string
+	// リクエスト構造体を渡す -> リクエストヘッダーの取得する
 
-	// BUG: auhotrizationが別の種類だとpanic発生する
-	// Authorizationヘッダーにあるかどうか確認
-	bearerTokenStr := r.Header.Get("Authorization")
-	if bearerTokenStr == "" {
-		err := errors.New("missing token") // errorインターフェースの作成
+	tokenString := r.Header.Get("Authorization")
+
+	// authrizationが別の種類だとpanic発生するので以下のように書き換え
+	// 文字列がBearerで始まるかどうか検証
+	if !strings.HasPrefix(tokenString, "Bearer ") {
+		err := errors.New("invalid token") // errorインターフェースの作成
 		return 0, err
 	}
-
-	fmt.Printf("token: %#v\n", bearerTokenStr)             // token: "Bearer jifdaslkjhdafskjhksdfhakfdk"
-	splitToken := strings.Split(bearerTokenStr, "Bearer ") // 第二引数: 何で分割したいのかで処理を行う 分割した結果をスライスの中に突っ込む
-
-	// stringのスライス
-	// ["","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI1NDU1OTYsInVzZXJfaWQiOjF9.B1PMPvxl4aGDaJXwXvZPJXxluh5S4lmiq5oen1KWiaU"]
-	fmt.Printf("splitToken: %v\n", splitToken)
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
 
 	// ここのtoken -> 無名関数である(あくまで関数の定義) -> Parse()の内部処理で使用する -> tokenの値を使用可能 -> 関数の説明をしっかり読めば分かる
-	parsedToken, err := jwt.Parse(splitToken[1], func(token *jwt.Token) (interface{}, error) {
+	parsedToken, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 
 		// 型アサーション -> algの検証を行う
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {

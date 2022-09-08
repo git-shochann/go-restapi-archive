@@ -259,3 +259,171 @@ net/http.(*conn).serve(0x1400019e140, {0x1005e1ca0, 0x140001d4f60})
 created by net/http.(*Server).Serve
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
 2022/09/08 15:49:10 habit.go:172: Token is expired
+2022/09/08 16:00:39 habit.go:40: Token is expired
+2022/09/08 16:00:47 habit.go:40: missing token
+2022/09/08 16:00:50 habit.go:40: Token is expired
+2022/09/08 16:00:53 server.go:3159: http: panic serving [::1]:63992: runtime error: index out of range [1] with length 1
+goroutine 41 [running]:
+net/http.(*conn).serve.func1(0x1400046b5e0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x104a0d7a0, 0x140005a0090})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x1400048a600)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:100 +0x4dc
+go-rest-api/controllers.CreateHabitFunc({0x104a37a20, 0x1400052e0e0}, 0x1400048a600)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x104a2cc78, {0x104a37a20, 0x1400052e0e0}, 0x1400048a600)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140004a6000, {0x104a37a20, 0x1400052e0e0}, 0x1400048a400)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140004b0000}, {0x104a37a20, 0x1400052e0e0}, 0x1400048a400)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400046b5e0, {0x104a39c80, 0x14000457a70})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:15:24 server.go:3159: http: panic serving [::1]:64113: runtime error: index out of range [1] with length 1
+goroutine 68 [running]:
+net/http.(*conn).serve.func1(0x140004eb680)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1050757a0, 0x140000183f0})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:103 +0x58c
+go-rest-api/controllers.CreateHabitFunc({0x10509fa20, 0x140001840e0}, 0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x105094c78, {0x10509fa20, 0x140001840e0}, 0x14000230200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400009a000, {0x10509fa20, 0x140001840e0}, 0x14000230000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000184000}, {0x10509fa20, 0x140001840e0}, 0x14000230000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140004eb680, {0x1050a1c80, 0x14000093a10})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:23:25 server.go:3159: http: panic serving [::1]:64230: runtime error: index out of range [1] with length 1
+goroutine 28 [running]:
+net/http.(*conn).serve.func1(0x140001948c0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1026857a0, 0x14000380180})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:95 +0x408
+go-rest-api/controllers.CreateHabitFunc({0x1026afa20, 0x140000aa000}, 0x14000230200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x1026a4c78, {0x1026afa20, 0x140000aa000}, 0x14000230200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140006ae000, {0x1026afa20, 0x140000aa000}, 0x14000230000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140006ba000}, {0x1026afa20, 0x140000aa000}, 0x14000230000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140001948c0, {0x1026b1cc0, 0x140001d4f60})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:24:01 server.go:3159: http: panic serving [::1]:64240: runtime error: index out of range [1] with length 1
+goroutine 6 [running]:
+net/http.(*conn).serve.func1(0x1400019e0a0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1005297a0, 0x14000018168})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000230100)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:95 +0x52c
+go-rest-api/controllers.CreateHabitFunc({0x100553a20, 0x14000614000}, 0x14000230100)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x100548c78, {0x100553a20, 0x14000614000}, 0x14000230100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400009a000, {0x100553a20, 0x14000614000}, 0x14000096200)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000134000}, {0x100553a20, 0x14000614000}, 0x14000096200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x1400019e0a0, {0x100555c80, 0x140001d5020})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:24:44 server.go:3159: http: panic serving [::1]:64257: runtime error: index out of range [1] with length 1
+goroutine 9 [running]:
+net/http.(*conn).serve.func1(0x14000114be0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1045957a0, 0x14000300948})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x140001b0200)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:96 +0x53c
+go-rest-api/controllers.CreateHabitFunc({0x1045bfa20, 0x1400054a0e0}, 0x140001b0200)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x1045b4c78, {0x1045bfa20, 0x1400054a0e0}, 0x140001b0200)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400053e000, {0x1045bfa20, 0x1400054a0e0}, 0x140001b0000)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x1400054a000}, {0x1045bfa20, 0x1400054a0e0}, 0x140001b0000)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000114be0, {0x1045c1c80, 0x14000485920})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:55:21 server.go:3159: http: panic serving [::1]:64388: runtime error: index out of range [1] with length 1
+goroutine 67 [running]:
+net/http.(*conn).serve.func1(0x140001960a0)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1051f57a0, 0x14000018408})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x1400050a300)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:96 +0x53c
+go-rest-api/controllers.CreateHabitFunc({0x10521fa20, 0x140001840e0}, 0x1400050a300)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x105214c78, {0x10521fa20, 0x140001840e0}, 0x1400050a300)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x1400012c000, {0x10521fa20, 0x140001840e0}, 0x1400050a100)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x14000184000}, {0x10521fa20, 0x140001840e0}, 0x1400050a100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140001960a0, {0x105221c80, 0x140001ccf60})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:55:47 server.go:3159: http: panic serving [::1]:64395: runtime error: index out of range [1] with length 1
+goroutine 67 [running]:
+net/http.(*conn).serve.func1(0x14000114b40)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x10098d7a0, 0x14000300978})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x14000492300)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:98 +0x5b8
+go-rest-api/controllers.CreateHabitFunc({0x1009b7a20, 0x140006b60e0}, 0x14000492300)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x1009acc78, {0x1009b7a20, 0x140006b60e0}, 0x14000492300)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x140006aa000, {0x1009b7a20, 0x140006b60e0}, 0x14000492100)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x140006b6000}, {0x1009b7a20, 0x140006b60e0}, 0x14000492100)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x14000114b40, {0x1009b9c80, 0x14000485920})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 16:58:59 habit.go:40: missing token
+2022/09/08 16:59:10 habit.go:40: missing token
+2022/09/08 16:59:15 habit.go:40: missing token
+2022/09/08 16:59:17 server.go:3159: http: panic serving [::1]:64416: runtime error: index out of range [1] with length 1
+goroutine 39 [running]:
+net/http.(*conn).serve.func1(0x140004b9540)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1801 +0xdc
+panic({0x1010457a0, 0x14000018828})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/runtime/panic.go:1052 +0x2ac
+go-rest-api/models.CheckJWTToken(0x1400052a600)
+	/Users/sho/Coding/go/src/go-rest-api/models/auth.go:98 +0x530
+go-rest-api/controllers.CreateHabitFunc({0x10106fa20, 0x1400056e1c0}, 0x1400052a600)
+	/Users/sho/Coding/go/src/go-rest-api/controllers/habit.go:36 +0x270
+net/http.HandlerFunc.ServeHTTP(0x101064c78, {0x10106fa20, 0x1400056e1c0}, 0x1400052a600)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2046 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0x14000564000, {0x10106fa20, 0x1400056e1c0}, 0x1400052a400)
+	/Users/sho/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1e4
+net/http.serverHandler.ServeHTTP({0x1400056e000}, {0x10106fa20, 0x1400056e1c0}, 0x1400052a400)
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:2878 +0x444
+net/http.(*conn).serve(0x140004b9540, {0x101071c80, 0x1400053b890})
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
+created by net/http.(*Server).Serve
+	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 17:10:09 habit.go:40: invalid token
+2022/09/08 17:12:38 habit.go:40: Token is expired
