@@ -20,8 +20,10 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
 	var signupUser models.UserSignupVaridation
 	err = json.Unmarshal(reqBody, &signupUser)
+
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		log.Println(err)
@@ -29,10 +31,12 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ok, result := signupUser.SignupVaridator()
+	fmt.Printf("ok: %v\n", ok)
+	fmt.Printf("result: %v\n", result)
 
 	// false時の処理
 	if !ok {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, result, http.StatusBadRequest)
 		log.Printf("result: %v\n", result)
 		return
 	}
@@ -48,6 +52,9 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("&createUser: %v\n", &createUser)
 
 	// 実際にDBに登録する
+
+	// 現在だとエラーメッセージがそのまま出されてしまう
+
 	if err := createUser.CreateUser(); err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		log.Println(err)
@@ -98,14 +105,14 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 
 	// emailでユーザーを検索する -> 成功したらuserに値が入る
-	// user自体の実態を書き換えるのでアドレスを渡してあげる
+	// user自体の実体を書き換えるのでアドレスを渡してあげる
 	err = models.GetUserByEmail(&user, signinUser.Email)
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
-	// 実態を書き換えたそのままuserを出力する
+	// 実体を書き換えたそのままuserを出力する
 	fmt.Printf("user: %v\n", user) // {{1 2022-08-31 08:42:39 +0000 UTC 2022-08-31 08:42:39 +0000 UTC <nil>} test test test@gmail.com $2a$10$9QZC62Z6JODHtR1Kg1WCPuH9dAvbU64XJkJNlSwCIwlpbBQ84Eqxq}
 
 	// ここでログインユーザーを取得出来たのでuserを使ってく
