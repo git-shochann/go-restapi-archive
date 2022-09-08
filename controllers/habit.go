@@ -43,7 +43,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
-	var habit models.Habit
+	var habit *models.Habit
 	habit.Content = habitVaridation.Content
 	habit.UserID = userID
 
@@ -56,7 +56,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("habit: %v\n", habit) // 時間が含まれていない
 
-	// ここの時点でhabitの実態は書き変わっているはず...。
+	// ここの時点でhabitの実体は書き変わっているはず...。
 
 	// WIP
 	response, err := json.Marshal(habit)
@@ -98,7 +98,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	var habit models.Habit
 
-	err = models.DeleteHabit(habitID, userID, habit)
+	err = models.DeleteHabit(habitID, userID, &habit)
 	if err != nil {
 		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		fmt.Println("エラー！")

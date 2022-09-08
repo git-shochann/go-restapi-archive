@@ -1,25 +1,20 @@
 package models
 
-import (
-	"fmt"
-)
+func (h *Habit) CreateHabit() error {
 
-func (h Habit) CreateHabit() error {
-	// ポインタを渡して実体を書き換える
-	if err := DB.Create(&h).Error; err != nil {
+	if err := DB.Create(h).Error; err != nil {
 		return err
 	}
-	fmt.Printf("h: %v\n", h) // h: {{2 2022-09-07 13:47:28.774095 +0900 JST m=+3.267163626 2022-09-07 13:47:28.774095 +0900 JST m=+3.267163626 <nil>} hello false 1}
+	// fmt.Printf("h: %v\n", h) // h: {{2 2022-09-07 13:47:28.774095 +0900 JST m=+3.267163626 2022-09-07 13:47:28.774095 +0900 JST m=+3.267163626 <nil>} hello false 1}
 	return nil
 
 }
 
-// WIP!
-func DeleteHabit(habitID, userID int, habit Habit) error {
+func DeleteHabit(habitID, userID int, habit *Habit) error {
 
-	// &habitが必要なのはなぜ？
+	// &habitでもhabitいける？ リフレクションが行われているっぽい
 	// 現在論理削除されているのに、再度削除処理が出来てしまう
-	if err := DB.Where("id = ? ", habitID).Delete(&habit).Error; err != nil {
+	if err := DB.Where("id = ? ", habitID).Delete(habit).Error; err != nil {
 		return err
 	}
 	return nil
@@ -44,7 +39,6 @@ func (u User) GetAllHabitByUserID(habit *[]Habit) error {
 		// ここの戻り値
 		return err
 	}
-	// ちゃんと返ってきてる
-	fmt.Printf("habit: %v\n", habit) // habit: [{{2 2022-09-07 04:47:29 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{3 2022-09-07 04:49:30 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaa false 1} {{4 2022-09-07 04:49:31 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{5 2022-09-07 04:50:22 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is testbbb false 1} {{6 2022-09-07 04:55:55 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaadsadsa false 1}]
+	// fmt.Printf("habit: %v\n", habit) // habit: [{{2 2022-09-07 04:47:29 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{3 2022-09-07 04:49:30 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaa false 1} {{4 2022-09-07 04:49:31 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is test false 1} {{5 2022-09-07 04:50:22 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} This is testbbb false 1} {{6 2022-09-07 04:55:55 +0000 UTC 2022-09-07 07:23:22 +0000 UTC <nil>} aaadsadsa false 1}]
 	return nil
 }

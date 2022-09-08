@@ -258,3 +258,4 @@ net/http.(*conn).serve(0x1400019e140, {0x1005e1ca0, 0x140001d4f60})
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:1929 +0xb6c
 created by net/http.(*Server).Serve
 	/opt/homebrew/Cellar/go/1.17.3/libexec/src/net/http/server.go:3033 +0x4b8
+2022/09/08 15:49:10 habit.go:172: Token is expired
