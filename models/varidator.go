@@ -8,7 +8,7 @@ type UserSignupVaridation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=8,max=15,lowercase"` // TODO: Error:Field validation for 'Password' failed on the 'numeric' tag
+	Password  string `json:"password" validate:"required,min=8,max=15,numeric,lowercase"` // TODO: Error:Field validation for 'Password' failed on the 'numeric' tag
 }
 
 func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
