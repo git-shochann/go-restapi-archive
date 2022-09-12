@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/go-playground/validator/v10"
 )
 
@@ -8,37 +10,39 @@ type UserSignupVaridation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=8,max=15,numeric,lowercase"` // TODO: Error:Field validation for 'Password' failed on the 'numeric' tag
+	Password  string `json:"password" validate:"required,min=8,max=15,lowercase"` // TODO: numericを入れるとエラー発生。Error:Field validation for 'Password' failed on the 'numeric' tag
 }
 
-// func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
+func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
 
-// 	validate := validator.New()
-// 	err := validate.Struct(&u)
+	validate := validator.New()
+	err := validate.Struct(&u)
 
-// 	var errorMessage string
+	fmt.Printf("err: %v\n", err)
 
-// 	if err != nil {
+	var errorMessage string
 
-// 		for _, fieldErr := range err.(validator.ValidationErrors) {
+	if err != nil {
 
-// 			fieldName := fieldErr.Field()
+		for _, fieldErr := range err.(validator.ValidationErrors) {
 
-// 			switch fieldName {
-// 			case "FirstName":
-// 				errorMessage = "Invalid First Name"
-// 			case "LastName":
-// 				errorMessage = "Invalid Last Name"
-// 			case "Email":
-// 				errorMessage = "Invalid Email"
-// 			case "Password":
-// 				errorMessage = "Invalid Password"
-// 			}
-// 		}
-// 		return false, errorMessage
-// 	}
-// 	return true, errorMessage
-// }
+			fieldName := fieldErr.Field()
+
+			switch fieldName {
+			case "FirstName":
+				errorMessage = fmt.Sprintf("Invalid First Name: %s", err.Error())
+			case "LastName":
+				errorMessage = fmt.Sprintf("Invalid Last Name: %s", err.Error())
+			case "Email":
+				errorMessage = fmt.Sprintf("Invalid Email: %s", err.Error())
+			case "Password":
+				errorMessage = fmt.Sprintf("Invalid Password, %s", err.Error())
+			}
+		}
+		return false, errorMessage
+	}
+	return true, errorMessage
+}
 
 // ログインのバリデーション
 type UserSigninVaridation struct {

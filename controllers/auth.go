@@ -16,7 +16,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	// Jsonでくるので、まずGoで使用できるようにする
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -25,7 +25,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(reqBody, &signupUser)
 
 	if err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -36,7 +36,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// false時の処理
 	if !ok {
-		models.SendErrorResponse(w, result, http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed validation", result, http.StatusBadRequest)
 		log.Printf("result: %v\n", result)
 		return
 	}
@@ -56,7 +56,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	// 現在だとエラーメッセージがそのまま出されてしまう
 
 	if err := createUser.CreateUser(); err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		models.SendErrorResponse(w, "Faild to create user", err.Error(), http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
@@ -68,7 +68,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	// なぜ登録出来なかったのかもう少し詳細のメッセージがあっていいかも。
 	// errを使って "message": err など？
 	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Unknown error occurred", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -80,14 +80,14 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
 
 	var signinUser models.UserSigninVaridation
 	if err := json.Unmarshal(reqBody, &signinUser); err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -96,7 +96,7 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 	ok, result := signinUser.SigninVaridator()
 
 	if !ok {
-		models.SendErrorResponse(w, result, http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed validation", result, http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -108,7 +108,7 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 	// user自体の実体を書き換えるのでアドレスを渡してあげる
 	err = models.GetUserByEmail(&user, signinUser.Email)
 	if err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		models.SendErrorResponse(w, "Faild to get user", err.Error(), http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
@@ -123,13 +123,13 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(signinUser.Password))
 	if err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		models.SendErrorResponse(w, "Password error occurred", err.Error(), http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
 
 	if err := models.SendAuthResponse(w, &user, 200); err != nil {
-		models.SendErrorResponse(w, err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Faild to sign in", err.Error(), http.StatusBadRequest)
 		log.Println(err)
 		return
 	}

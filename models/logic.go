@@ -39,10 +39,20 @@ func SendResponse(w http.ResponseWriter, response []byte, code int) error {
 }
 
 // ステータスコード200以外のレスポンスで使用
-func SendErrorResponse(w http.ResponseWriter, errorMessage string, code int) error {
+// message: err.Error() とする
+func SendErrorResponse(w http.ResponseWriter, myMessage string, errorMessage string, code int) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	_, err := w.Write([]byte(errorMessage))
+	response := map[string]string{
+		"message": myMessage,
+		"detail":  errorMessage,
+	}
+	// jsonに変換する
+	responseBody, err := json.Marshal(response)
+	if err != nil {
+		return err
+	}
+	_, err = w.Write(responseBody)
 	if err != nil {
 		return err
 	}
