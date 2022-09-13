@@ -40,12 +40,11 @@ func SendResponse(w http.ResponseWriter, response []byte, code int) error {
 
 // ステータスコード200以外のレスポンスで使用
 // message: err.Error() とする
-func SendErrorResponse(w http.ResponseWriter, myMessage string, errorMessage string, code int) error {
+func SendErrorResponse(w http.ResponseWriter, errorMessage string, code int) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	response := map[string]string{
-		"message": myMessage,
-		"detail":  errorMessage,
+		"message": errorMessage,
 	}
 	// jsonに変換する
 	responseBody, err := json.Marshal(response)

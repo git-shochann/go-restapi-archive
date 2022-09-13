@@ -18,7 +18,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// Bodyを検証
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -26,7 +26,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	var habitVaridation models.CreateHabitVaridation
 	err = json.Unmarshal(reqBody, &habitVaridation)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -35,7 +35,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// JWTの検証
 	userID, err := models.CheckJWTToken(r)
 	if err != nil {
-		models.SendErrorResponse(w, "Authentication error", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Authentication error", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -49,7 +49,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	err = habit.CreateHabit()
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to create habit", err.Error(), http.StatusInternalServerError)
+		models.SendErrorResponse(w, "Failed to create habit", http.StatusInternalServerError)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -61,7 +61,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// WIP
 	response, err := json.Marshal(habit)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -74,7 +74,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := models.CheckJWTToken(r)
 	if err != nil {
-		models.SendErrorResponse(w, "authentication error", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -90,7 +90,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 	habitID, err := strconv.Atoi(habitIDStr)
 	if err != nil {
 		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
-		models.SendErrorResponse(w, "Something wrong", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -100,7 +100,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	err = models.DeleteHabit(habitID, userID, &habit)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to delete habit", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to delete habit", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -114,7 +114,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// Bodyを検証
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -122,7 +122,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	var habitVaridation models.CreateHabitVaridation
 	err = json.Unmarshal(reqBody, &habitVaridation)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -131,7 +131,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// JWTの検証
 	userID, err := models.CheckJWTToken(r)
 	if err != nil {
-		models.SendErrorResponse(w, "authentication error", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -145,14 +145,14 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	err = habit.UpdateHabit()
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to update habit", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to update habit", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
 
 	response, err := json.Marshal(habit)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -167,7 +167,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := models.CheckJWTToken(r)
 	if err != nil {
-		models.SendErrorResponse(w, "authentication error", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -181,7 +181,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 	parameterUserID, err := strconv.Atoi(parameterUserIDStr)
 	if err != nil {
 		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
-		models.SendErrorResponse(w, "Something wrong", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -189,7 +189,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	// パスパラメーターのID + JWTで検証したIDが一致しなければエラー
 	if userID != parameterUserID {
-		models.SendErrorResponse(w, "Something wrong", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -202,7 +202,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 	err = user.GetAllHabitByUserID(&habit) // 旧: 値を渡す, 新: ポインタ(アドレス)を渡すことでしっかりと返却された
 	if err != nil {
 		// 今だと... strconv.Atoi: parsing "": invalid syntax とただのエラーメッセージが返却される
-		models.SendErrorResponse(w, "Failed to get habit", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to get habit", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
@@ -210,7 +210,7 @@ func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	response, err := json.Marshal(habit)
 	if err != nil {
-		models.SendErrorResponse(w, "Failed to read json", err.Error(), http.StatusBadRequest)
+		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		fmt.Println("エラー！")
 		log.Println(err)
 		return
