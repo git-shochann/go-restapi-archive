@@ -17,7 +17,6 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
-		log.Println(err)
 		return
 	}
 
@@ -53,20 +52,12 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 
 	// 実際にDBに登録する
 
-	// 現在だとエラーメッセージがそのまま出されてしまう
-
 	if err := createUser.CreateUser(); err != nil {
 		models.SendErrorResponse(w, "Faild to create user", http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
 
-	// 重複時
-	// -> "Error 1062: Duplicate entry 'test@gmail.com' for key 'users.email'"
-
-	// 成功！
-	// なぜ登録出来なかったのかもう少し詳細のメッセージがあっていいかも。
-	// errを使って "message": err など？
 	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
 		models.SendErrorResponse(w, "Unknown error occurred", http.StatusBadRequest)
 		log.Println(err)

@@ -16,8 +16,8 @@ func LoggingSetting() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	multiLogFile := io.MultiWriter(os.Stdout, file)      // 出力先を2つ設定
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile) // 出力のフォーマットを設定
+	multiLogFile := io.MultiWriter(os.Stdout, file)      // 出力先を2つ設定
 	log.SetOutput(multiLogFile)                          // 実際に設定を反映
 
 }
