@@ -50,7 +50,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
-	var habit *models.Habit
+	var habit models.Habit
 	habit.Content = habitValidation.Content
 	habit.UserID = userID
 
@@ -80,7 +80,6 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	fmt.Println("JWTの検証完了!!")
 
 	// 確認したJWTのクレームのuser_id
 	// パスパラメーターから取得する habitのid
@@ -109,7 +108,31 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// WIP: 現在1つのIDを送ってるのにそのユーザーに紐付く習慣全て変わってる
 func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
+
+	// JWTの検証
+	userID, err := models.CheckJWTToken(r)
+	if err != nil {
+		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
+
+		log.Println(err)
+		return
+	}
+
+	// 確認したJWTのクレームのuser_id
+	// パスパラメーターから取得する habitのid
+
+	vars := mux.Vars(r)
+	fmt.Printf("vars: %v\n", vars) // vars: map[id:1]
+	habitIDStr := vars["id"]
+
+	habitID, err := strconv.Atoi(habitIDStr)
+	if err != nil {
+		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
 
 	// Bodyを検証
 	reqBody, err := ioutil.ReadAll(r.Body)
@@ -136,20 +159,10 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// JWTの検証
-	userID, err := models.CheckJWTToken(r)
-	if err != nil {
-		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
-
-		log.Println(err)
-		return
-	}
-
 	var habit models.Habit
-	habit.Content = habitValidation.Content
-	habit.UserID = userID
-
-	// アップデートに必要なのは、habitid, content, (後ほど...finished)
+	habit.Model.ID = uint(habitID)          // id(habit)
+	habit.Content = habitValidation.Content // content
+	habit.UserID = userID                   // user_id
 
 	err = habit.UpdateHabit()
 	if err != nil {
@@ -157,6 +170,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+	fmt.Printf("habit: %v\n", habit)
 
 	response, err := json.Marshal(habit)
 	if err != nil {
@@ -173,30 +187,10 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 // ユーザー1人が持っているhabitを全て取得する
 func GetAllHabitFunc(w http.ResponseWriter, r *http.Request) {
 
+	// JWTの検証とユーザーIDの取得
 	userID, err := models.CheckJWTToken(r)
 	if err != nil {
 		models.SendErrorResponse(w, "authentication error", http.StatusBadRequest)
-
-		log.Println(err)
-		return
-	}
-	fmt.Println("JWTの検証完了!!")
-
-	// パスパラメーターでuserid取得可能
-	vars := mux.Vars(r)
-	parameterUserIDStr := vars["id"]
-
-	parameterUserID, err := strconv.Atoi(parameterUserIDStr)
-	if err != nil {
-		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
-
-		log.Println(err)
-		return
-	}
-
-	// パスパラメーターのID + JWTで検証したIDが一致しなければエラー
-	if userID != parameterUserID {
-		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
 
 		log.Println(err)
 		return

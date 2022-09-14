@@ -3,11 +3,10 @@ package models
 // エラーハンドリング
 // https://gorm.io/ja_JP/docs/error_handling.html
 
-// 値渡し
-func (u User) CreateUser() error {
+// ポインタ渡し -> 元の実体を書き換えるので
+func (u *User) CreateUser() error {
 
-	// uのポインタ(アドレス)を渡す
-	if err := DB.Create(&u).Error; err != nil {
+	if err := DB.Create(u).Error; err != nil {
 		return err
 	}
 	return nil

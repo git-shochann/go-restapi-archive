@@ -43,18 +43,15 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 	createUser.Email = signupUser.Email
 	createUser.Password = models.EncryptPassword(signupUser.Password)
 
-	fmt.Printf("createUser: %v\n", createUser)
-	fmt.Printf("&createUser: %v\n", &createUser)
-
 	// 実際にDBに登録する
-
 	if err := createUser.CreateUser(); err != nil {
 		models.SendErrorResponse(w, "Faild to create user", http.StatusInternalServerError)
 		log.Println(err)
 		return
 	}
 
-	if err := models.SendAuthResponse(w, &createUser, 200); err != nil {
+	// createUser -> ポインタ型(アドレス)
+	if err := models.SendAuthResponse(w, &createUser, http.StatusOK); err != nil {
 		models.SendErrorResponse(w, "Unknown error occurred", http.StatusBadRequest)
 		log.Println(err)
 		return

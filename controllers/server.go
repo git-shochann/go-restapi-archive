@@ -13,9 +13,9 @@ func StartServer() {
 	router.HandleFunc("/", indexFunc)
 	router.HandleFunc("/api/v1/signup", SignupFunc).Methods("POST")
 	router.HandleFunc("/api/v1/signin", SigninFunc).Methods("POST")
-	router.HandleFunc("/api/v1/get/{id}", GetAllHabitFunc).Methods("GET")
+	router.HandleFunc("/api/v1/get", GetAllHabitFunc).Methods("GET")
 	router.HandleFunc("/api/v1/create", CreateHabitFunc).Methods("POST")
-	router.HandleFunc("/api/v1/update", UpdateHabitFunc).Methods("PATCH")
+	router.HandleFunc("/api/v1/update/{id}", UpdateHabitFunc).Methods("PATCH")
 	router.HandleFunc("/api/v1/delete/{id}", DeteteHabitFunc).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

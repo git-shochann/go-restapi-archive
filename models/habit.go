@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 func (h *Habit) CreateHabit() error {
 
 	if err := DB.Create(h).Error; err != nil {
@@ -20,10 +22,12 @@ func DeleteHabit(habitID, userID int, habit *Habit) error {
 	return nil
 }
 
-func (h Habit) UpdateHabit() error {
-	if err := DB.Model(&h).Update("content", h.Content).Error; err != nil {
+// WIP: habit構造体のidを使用して、habitIDを特定し、そのhabitを更新したい
+func (h *Habit) UpdateHabit() error {
+	if err := DB.Model(h).Where("id = ? AND user_id = ?", h.Model.ID, h.ID).Update("content", h.Content).Error; err != nil {
 		return err
 	}
+	fmt.Printf("h: %+v\n", h)
 	return nil
 }
 

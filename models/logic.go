@@ -69,7 +69,7 @@ func SendAuthResponse(w http.ResponseWriter, user *User, code int) error {
 
 	// レスポンス
 	response := AuthResponse{
-		User:     *user,
+		User:     *user, // デリファレンスする
 		JwtToken: jwtToken,
 	}
 
