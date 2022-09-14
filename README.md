@@ -47,6 +47,8 @@ done!
 
 ## 使用パッケージなど
 
+---
+
 環境変数の管理
 
 - `https://github.com/joho/godotenv`
@@ -66,3 +68,9 @@ Validation
 認証関連
 
 - `https://github.com/golang-jwt/jwt`
+
+## 仕様
+
+---
+
+- 詳細のログはログファイルに書き出します。
