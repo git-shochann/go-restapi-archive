@@ -29,14 +29,10 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ok, result := signupUser.SignupVaridator()
-	fmt.Printf("ok: %v\n", ok)
-	fmt.Printf("result: %v\n", result)
-
-	// false時の処理
-	if !ok {
-		models.SendErrorResponse(w, result, http.StatusBadRequest)
-		log.Printf("result: %v\n", result)
+	errorMessage, err := signupUser.SignupVaridator()
+	if err != nil {
+		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
+		log.Println(err)
 		return
 	}
 
@@ -84,10 +80,10 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// バリデーションの実施
-	ok, result := signinUser.SigninVaridator()
+	errorMessage, err := signinUser.SigninVaridator()
 
-	if !ok {
-		models.SendErrorResponse(w, result, http.StatusBadRequest)
+	if err != nil {
+		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
 		log.Println(err)
 		return
 	}

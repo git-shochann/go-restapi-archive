@@ -10,10 +10,10 @@ type UserSignupVaridation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=8,max=15,lowercase"` // TODO: numericを入れるとエラー発生。Error:Field validation for 'Password' failed on the 'numeric' tag
+	Password  string `json:"password" validate:"required,min=8,max=15,containsany=0123456789"`
 }
 
-func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
+func (u UserSignupVaridation) SignupVaridator() (string, error) {
 
 	validate := validator.New()
 	err := validate.Struct(&u)
@@ -30,27 +30,27 @@ func (u UserSignupVaridation) SignupVaridator() (ok bool, errMessage string) {
 
 			switch fieldName {
 			case "FirstName":
-				errorMessage = fmt.Sprintf("Invalid First Name: %s", err.Error())
+				errorMessage = "Invalid First Name"
 			case "LastName":
-				errorMessage = fmt.Sprintf("Invalid Last Name: %s", err.Error())
+				errorMessage = "Invalid Last Name"
 			case "Email":
-				errorMessage = fmt.Sprintf("Invalid Email: %s", err.Error())
+				errorMessage = "Invalid Email"
 			case "Password":
-				errorMessage = fmt.Sprintf("Invalid Password, %s", err.Error())
+				errorMessage = "Invalid Password"
 			}
 		}
-		return false, errorMessage
+		return errorMessage, err
 	}
-	return true, errorMessage
+	return "", err
 }
 
 // ログインのバリデーション
 type UserSigninVaridation struct {
 	Email    string `json:"email" validate:"required,email"`
-	Password string `json:"password" validate:"required,min=8,max=15,lowercase"` // TODO: 上記と同様
+	Password string `json:"password" validate:"required,min=8,max=15,containsany=0123456789"`
 }
 
-func (u UserSigninVaridation) SigninVaridator() (ok bool, errMessage string) {
+func (u UserSigninVaridation) SigninVaridator() (string, error) {
 	validate := validator.New()
 	err := validate.Struct(&u)
 
@@ -58,6 +58,7 @@ func (u UserSigninVaridation) SigninVaridator() (ok bool, errMessage string) {
 
 	if err != nil {
 		for _, fieldErr := range err.(validator.ValidationErrors) {
+
 			fieldName := fieldErr.Field()
 
 			switch fieldName {
@@ -67,9 +68,9 @@ func (u UserSigninVaridation) SigninVaridator() (ok bool, errMessage string) {
 				errorMessage = "Invalid Password"
 			}
 		}
-		return false, errorMessage
+		return errorMessage, err
 	}
-	return true, errorMessage
+	return "", err
 }
 
 // 習慣を登録するときのバリデーション
@@ -77,7 +78,7 @@ type CreateHabitVaridation struct {
 	Content string `json:"content" validate:"required"`
 }
 
-func (c CreateHabitVaridation) CreateHabitVaridator() (ok bool, errMessage string) {
+func (c CreateHabitVaridation) CreateHabitVaridator() (string, error) {
 	validate := validator.New()
 	err := validate.Struct(&c)
 
@@ -93,7 +94,7 @@ func (c CreateHabitVaridation) CreateHabitVaridator() (ok bool, errMessage strin
 
 			}
 		}
-		return false, errorMessage
+		return errorMessage, err
 	}
-	return true, errorMessage
+	return "", err
 }
