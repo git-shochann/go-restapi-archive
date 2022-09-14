@@ -23,10 +23,19 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// バリデーションの実施
 	var habitVaridation models.CreateHabitVaridation
 	err = json.Unmarshal(reqBody, &habitVaridation)
 	if err != nil {
 		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	errorMessage, err := habitVaridation.CreateHabitVaridator()
+
+	if err != nil {
+		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
@@ -110,6 +119,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// バリデーションの実施
 	var habitVaridation models.CreateHabitVaridation
 	err = json.Unmarshal(reqBody, &habitVaridation)
 	if err != nil {
@@ -117,7 +127,14 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	fmt.Println(habitVaridation)
+
+	errorMessage, err := habitVaridation.CreateHabitVaridator()
+
+	if err != nil {
+		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
 
 	// JWTの検証
 	userID, err := models.CheckJWTToken(r)
