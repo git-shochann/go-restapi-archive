@@ -24,15 +24,15 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// バリデーションの実施
-	var habitVaridation models.CreateHabitVaridation
-	err = json.Unmarshal(reqBody, &habitVaridation)
+	var habitValidation models.CreateHabitValidation
+	err = json.Unmarshal(reqBody, &habitValidation)
 	if err != nil {
 		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
 
-	errorMessage, err := habitVaridation.CreateHabitVaridator()
+	errorMessage, err := habitValidation.CreateHabitValidator()
 
 	if err != nil {
 		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
@@ -51,7 +51,7 @@ func CreateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// JWTにIDが乗っているので、IDをもとに保存処理をする
 
 	var habit *models.Habit
-	habit.Content = habitVaridation.Content
+	habit.Content = habitValidation.Content
 	habit.UserID = userID
 
 	err = habit.CreateHabit()
@@ -120,15 +120,15 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// バリデーションの実施
-	var habitVaridation models.CreateHabitVaridation
-	err = json.Unmarshal(reqBody, &habitVaridation)
+	var habitValidation models.CreateHabitValidation
+	err = json.Unmarshal(reqBody, &habitValidation)
 	if err != nil {
 		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
 		return
 	}
 
-	errorMessage, err := habitVaridation.CreateHabitVaridator()
+	errorMessage, err := habitValidation.CreateHabitValidator()
 
 	if err != nil {
 		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
@@ -146,7 +146,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var habit models.Habit
-	habit.Content = habitVaridation.Content
+	habit.Content = habitValidation.Content
 	habit.UserID = userID
 
 	// アップデートに必要なのは、habitid, content, (後ほど...finished)

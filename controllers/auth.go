@@ -20,7 +20,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var signupUser models.UserSignupVaridation
+	var signupUser models.UserSignupValidation
 	err = json.Unmarshal(reqBody, &signupUser)
 
 	if err != nil {
@@ -29,7 +29,7 @@ func SignupFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	errorMessage, err := signupUser.SignupVaridator()
+	errorMessage, err := signupUser.SignupValidator()
 	if err != nil {
 		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)
 		log.Println(err)
@@ -72,7 +72,7 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var signinUser models.UserSigninVaridation
+	var signinUser models.UserSigninValidation
 	if err := json.Unmarshal(reqBody, &signinUser); err != nil {
 		models.SendErrorResponse(w, "Failed to read json", http.StatusBadRequest)
 		log.Println(err)
@@ -80,7 +80,7 @@ func SigninFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// バリデーションの実施
-	errorMessage, err := signinUser.SigninVaridator()
+	errorMessage, err := signinUser.SigninValidator()
 
 	if err != nil {
 		models.SendErrorResponse(w, errorMessage, http.StatusBadRequest)

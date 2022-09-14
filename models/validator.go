@@ -6,14 +6,14 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type UserSignupVaridation struct {
+type UserSignupValidation struct {
 	FirstName string `json:"firstname" validate:"required"`
 	LastName  string `json:"lastname" validate:"required"`
 	Email     string `json:"email" validate:"required,email"`
 	Password  string `json:"password" validate:"required,min=8,max=15,containsany=0123456789"`
 }
 
-func (u UserSignupVaridation) SignupVaridator() (string, error) {
+func (u UserSignupValidation) SignupValidator() (string, error) {
 
 	validate := validator.New()
 	err := validate.Struct(&u)
@@ -45,12 +45,12 @@ func (u UserSignupVaridation) SignupVaridator() (string, error) {
 }
 
 // ログインのバリデーション
-type UserSigninVaridation struct {
+type UserSigninValidation struct {
 	Email    string `json:"email" validate:"required,email"`
 	Password string `json:"password" validate:"required,min=8,max=15,containsany=0123456789"`
 }
 
-func (u UserSigninVaridation) SigninVaridator() (string, error) {
+func (u UserSigninValidation) SigninValidator() (string, error) {
 	validate := validator.New()
 	err := validate.Struct(&u)
 
@@ -74,11 +74,11 @@ func (u UserSigninVaridation) SigninVaridator() (string, error) {
 }
 
 // 習慣を登録するときのバリデーション
-type CreateHabitVaridation struct {
+type CreateHabitValidation struct {
 	Content string `json:"content" validate:"required"`
 }
 
-func (c CreateHabitVaridation) CreateHabitVaridator() (string, error) {
+func (c CreateHabitValidation) CreateHabitValidator() (string, error) {
 	validate := validator.New()
 	err := validate.Struct(&c)
 

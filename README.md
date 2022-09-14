@@ -59,7 +59,7 @@ MySQL
 
 - `https://github.com/go-sql-driver/mysql`
 
-Varidation
+Validation
 
 - `https://github.com/go-playground/validator`
 
