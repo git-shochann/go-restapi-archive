@@ -1,35 +1,23 @@
-name: test
-
-on:
-  push:
-  pull_request:
+name: static check
+on: pull_request
 
 jobs:
-  setup:
+  fmt:
+    name: Fmt
     runs-on: ubuntu-latest
     steps:
-      - name: setup
-        uses: actions/setup-go@v2
+      - uses: actions/checkout@master
+      - uses: grandcolline/golang-github-actions@v1.0.0
         with:
-          go-version: ^1.17
-        id: go
-      - name: check out
-        uses: actions/checkout@v2
+          run: fmt
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 処理を高速化するために環境をキャッシュ
-      - name: Cache
-        uses: actions/cache@v2.1.0
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
   lint:
-    needs: setup
+    name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+      - uses: actions/checkout@master
+      - uses: grandcolline/golang-github-actions@v1.0.0
         with:
-          version: v1.29
+          run: lint
+          token: ${{ secrets.GITHUB_TOKEN }}
