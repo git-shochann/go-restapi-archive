@@ -1,25 +1,15 @@
 name: static check
+
 on:
   pull_request:
   push:
 
 jobs:
-  fmt:
-    name: Fmt
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: grandcolline/golang-github-actions@v1.0.0
-        with:
-          run: fmt
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: grandcolline/golang-github-actions@v1.0.0
+      - uses: actions/checkout@main
+      - uses: dominikh/staticcheck-action@v1.2.0
         with:
-          run: lint
-          token: ${{ secrets.GITHUB_TOKEN }}
+          version: "2022.1.1"
