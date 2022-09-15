@@ -1,6 +1,4 @@
-# Habit Management
-
-RestAPI を Go で試してみる DB は Docker にて作成
+# Go RestAPI With Docker
 
 ## API 一覧
 
@@ -74,3 +72,4 @@ Validation
 ---
 
 - 詳細のログはログファイルに書き出します。
+- Push、PL 後 Github Actions にて Lint チェックを行う
