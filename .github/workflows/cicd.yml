@@ -5,6 +5,7 @@ on:
   push:
 
 jobs:
+  # 一応Lintチェックする
   lint:
     name: Lint
     runs-on: ubuntu-latest
