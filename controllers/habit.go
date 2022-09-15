@@ -81,8 +81,7 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 確認したJWTのクレームのuser_id
-	// パスパラメーターから取得する habitのid
+	// 確認したJWTのクレームのuser_id + パスパラメーターから取得する habitのidで削除処理を実装する
 	vars := mux.Vars(r)
 	fmt.Printf("vars: %v\n", vars) // vars: map[id:1]
 	habitIDStr := vars["id"]
@@ -90,7 +89,6 @@ func DeteteHabitFunc(w http.ResponseWriter, r *http.Request) {
 	habitID, err := strconv.Atoi(habitIDStr)
 	if err != nil {
 		models.SendErrorResponse(w, "Something wrong", http.StatusBadRequest)
-
 		log.Println(err)
 		return
 	}
@@ -124,7 +122,7 @@ func UpdateHabitFunc(w http.ResponseWriter, r *http.Request) {
 	// パスパラメーターから取得する habitのid
 
 	vars := mux.Vars(r)
-	fmt.Printf("vars: %v\n", vars) // vars: map[id:1]
+	// fmt.Printf("vars: %v\n", vars) // vars: map[id:1]
 	habitIDStr := vars["id"]
 
 	habitID, err := strconv.Atoi(habitIDStr)

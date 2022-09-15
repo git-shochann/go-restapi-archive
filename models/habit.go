@@ -1,6 +1,9 @@
 package models
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func (h *Habit) CreateHabit() error {
 
@@ -14,16 +17,25 @@ func (h *Habit) CreateHabit() error {
 
 func DeleteHabit(habitID, userID int, habit *Habit) error {
 
-	// &habitでもhabitいける？ リフレクションが行われているっぽい
-	// 現在論理削除されているのに、再度削除処理が出来てしまう
-	if err := DB.Where("id = ? ", habitID).Delete(habit).Error; err != nil {
+	// &habitでもhabitでも問題がないのは内部でリフレクションが行われているため
+	db := DB.Where("id = ? AND user_id = ?", habitID, userID).Delete(habit)
+
+	if err := db.Error; err != nil {
 		return err
 	}
+
+	// 実際にレコードがあり削除されたかどうかの判定は以下で行う
+	if db.RowsAffected < 1 {
+		err := errors.New("not found record")
+		return err
+	}
+
 	return nil
 }
 
-// WIP: habit構造体のidを使用して、habitIDを特定し、そのhabitを更新したい
+// BUG: パスパラメーターで適当な数字をやっても200が返って来てしまう。 -> もちろんDBは変更されていない
 func (h *Habit) UpdateHabit() error {
+	fmt.Printf("h: %+v\n", h)
 	if err := DB.Model(h).Where("id = ? AND user_id = ?", h.Model.ID, h.ID).Update("content", h.Content).Error; err != nil {
 		return err
 	}
