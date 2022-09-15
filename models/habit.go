@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 )
 
 func (h *Habit) CreateHabit() error {
@@ -18,14 +17,14 @@ func (h *Habit) CreateHabit() error {
 func DeleteHabit(habitID, userID int, habit *Habit) error {
 
 	// &habitでもhabitでも問題がないのは内部でリフレクションが行われているため
-	db := DB.Where("id = ? AND user_id = ?", habitID, userID).Delete(habit)
+	result := DB.Where("id = ? AND user_id = ?", habitID, userID).Delete(habit)
 
-	if err := db.Error; err != nil {
+	if err := result.Error; err != nil {
 		return err
 	}
 
-	// 実際にレコードがあり削除されたかどうかの判定は以下で行う
-	if db.RowsAffected < 1 {
+	// 実際にレコードが存在し、削除されたかどうかの判定は以下で行う
+	if result.RowsAffected < 1 {
 		err := errors.New("not found record")
 		return err
 	}
@@ -33,18 +32,25 @@ func DeleteHabit(habitID, userID int, habit *Habit) error {
 	return nil
 }
 
-// BUG: パスパラメーターで適当な数字をやっても200が返って来てしまう。 -> もちろんDBは変更されていない
 func (h *Habit) UpdateHabit() error {
-	fmt.Printf("h: %+v\n", h)
-	if err := DB.Model(h).Where("id = ? AND user_id = ?", h.Model.ID, h.ID).Update("content", h.Content).Error; err != nil {
+
+	result := DB.Model(h).Where("id = ? AND user_id = ?", h.Model.ID, h.UserID).Update("content", h.Content)
+
+	if err := result.Error; err != nil {
 		return err
 	}
-	fmt.Printf("h: %+v\n", h)
+
+	// 実際にレコードが存在し、更新されたかどうかの判定は以下で行う
+	if result.RowsAffected < 1 {
+		err := errors.New("not found record") // 当たり前のように論理削除していたら更新は不可
+		return err
+	}
+
 	return nil
 }
 
 //実体を受け取って、実体を書き換えるので、戻り値に指定する必要はない。
-// 旧: 値渡し, 新: ポインタを受け取る！
+// 旧: 値渡し, 新: ポインタを受け取る！s
 func (u User) GetAllHabitByUserID(habit *[]Habit) error {
 	// habitテーブル内の外部キーであるuseridで全てを取得する
 	// fmt.Printf("u.ID: %v\n", u.ID)     // 1
