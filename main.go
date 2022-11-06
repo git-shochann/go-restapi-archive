@@ -1,14 +1,8 @@
-// package main
+package main
 
-// import (
-// 	"fmt"
-// 	"go-rest-api/controllers"
-// 	"go-rest-api/models"
-// 	"log"
-// 	"os"
-
-// 	"github.com/joho/godotenv"
-// )
+import (
+	"go-rest-api/controllers"
+)
 
 // func loadENV() {
 // 	err := godotenv.Load(".env")
@@ -19,17 +13,17 @@
 // 	fmt.Println(os.Getenv("SAMPLE_MESSAGE"))
 // }
 
-// func main() {
+func main() {
 
-// 	// 環境変数の読み込み
-// 	loadENV()
+	// 	// 環境変数の読み込み
+	// 	loadENV()
 
-// 	// ログ関連の設定
-// 	models.LoggingSetting()
+	// 	// ログ関連の設定
+	// 	models.LoggingSetting()
 
-// 	// DBに接続してテーブルを作成する
-// 	models.ConnectDB()
+	// 	// DBに接続してテーブルを作成する
+	// 	models.ConnectDB()
 
-// 	// APIサーバーのスタート
-// 	controllers.StartServer()
-// }
+	// 	// APIサーバーのスタート
+	controllers.StartServer()
+}

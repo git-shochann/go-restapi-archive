@@ -1,4 +1,4 @@
-// package models
+package models
 
 // // エラーハンドリング
 // // https://gorm.io/ja_JP/docs/error_handling.html
